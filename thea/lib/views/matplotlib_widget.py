@@ -8,6 +8,9 @@ class MatplotlibWidget(TheaWidget):
     """
     A widget for displaying matplotlib plots.
     """
+    figure = None
+    canvas = None
+
     def __init__(self):
         super(MatplotlibWidget, self).__init__()
 
@@ -16,13 +19,17 @@ class MatplotlibWidget(TheaWidget):
     def init_ui(self):
 
         # get a reference to the current figure.
-        figure = plt.gcf()
+        self.figure = plt.gcf()
 
         # create a canvas to draw the figure on.
-        canvas = FigureCanvas(figure)
+        self.canvas = FigureCanvas(self.figure)
 
         vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(canvas)
+        vbox.addWidget(self.canvas)
         self.setLayout(vbox)
 
         self.show()
+
+    def display(self, figure):
+        self.figure = figure
+        self.canvas.draw()
