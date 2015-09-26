@@ -6,18 +6,23 @@ class UpdatePlotWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self):
+
+    def __init__(self, plot_controller):
         super(UpdatePlotWidget, self).__init__()
 
+        self._update_button = QtGui.QPushButton('Update Plot')
+
+        self.plot_controller = plot_controller
+
         self.init_ui()
+        self.bind_events()
 
     def init_ui(self):
         self.setMaximumHeight(100)
-
         grid = QtGui.QGridLayout()
-
-        grid.addWidget(QtGui.QPushButton('Update Plot'), 0, 0)
-
+        grid.addWidget(self._update_button, 0, 0)
         self.setLayout(grid)
-
         self.show()
+
+    def bind_events(self):
+        self._update_button.clicked.connect(self.plot_controller.update_plot)

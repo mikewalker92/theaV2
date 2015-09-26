@@ -12,8 +12,12 @@ class CentralWidget(TheaWidget):
     The CentralWidget divides the window into rough sections using splitters, and defines
     child widgets to populate the sections.
     """
-    def __init__(self):
+    def __init__(self, matplotlib_widget, cube_viewer_widget, options_widget):
         super(CentralWidget, self).__init__()
+
+        self._matplotlib_widget = matplotlib_widget
+        self._cube_viewer_widget = cube_viewer_widget
+        self._options_widget = options_widget
 
         self.init_ui()
 
@@ -21,12 +25,12 @@ class CentralWidget(TheaWidget):
         self.set_background_color(Colors.background_accent)
 
         splitter = QtGui.QSplitter(Qt.Vertical)
-        splitter.addWidget(MatplotlibWidget())
-        splitter.addWidget(CubeViewerWidget())
+        splitter.addWidget(self._matplotlib_widget)
+        splitter.addWidget(self._cube_viewer_widget)
 
         grid = QtGui.QGridLayout()
         grid.addWidget(splitter, 1, 0, 2, 1)
-        grid.addWidget(OptionsWidget(), 1, 1, 2, 1)
+        grid.addWidget(self._options_widget, 1, 1, 2, 1)
         self.setLayout(grid)
 
         self.show()

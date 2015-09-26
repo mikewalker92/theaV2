@@ -24,10 +24,6 @@ class MatplotlibWidget(TheaWidget):
         # create a canvas to draw the figure on.
         self.canvas = FigureCanvas(self.figure)
 
-        vbox = QtGui.QVBoxLayout()
-        vbox.addWidget(self.canvas)
-        self.setLayout(vbox)
-
         self.show()
 
     def display(self, figure):

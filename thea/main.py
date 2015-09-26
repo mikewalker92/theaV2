@@ -1,12 +1,10 @@
 """
-Entry point thea.
+Entry point to Thea.
 """
 
 import warnings
 # We wish to reduce output to the terminal when the program is running.
-from thea.lib.controllers.main_controller import MainController
-from thea.lib.services.main_service import MainService
-from thea.lib.services.plot_service import PlotService
+from thea.lib.config.application_config import ApplicationConfig
 
 warnings.filterwarnings("ignore")
 
@@ -23,11 +21,9 @@ import thea.lib.views.main_window as main_window
 def main():
     app = QtGui.QApplication(sys.argv)
 
-    plot_service = PlotService()
-    main_service = MainService(plot_service)
-    main_controller = MainController(main_service)
+    application_config = ApplicationConfig()
 
-    _ = main_window.MainWindow(main_controller)
+    _ = main_window.MainWindow(application_config.get_central_widget())
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

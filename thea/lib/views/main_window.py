@@ -1,6 +1,4 @@
-from PySide.QtGui import QMenuBar
 import matplotlib
-from thea.resources.thea_colors import Colors
 
 matplotlib.use('Qt4Agg')
 matplotlib.rcParams['backend.qt4'] = 'PySide'
@@ -18,10 +16,10 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, controller):
+    def __init__(self, central_widget):
         super(MainWindow, self).__init__()
+        self._centralWidget = central_widget
 
-        self.controller = controller
         self.init_ui()
         self.set_up_actions()
 
@@ -32,7 +30,7 @@ class MainWindow(QtGui.QMainWindow):
         relative_path_to_icon = os.path.join(os.path.dirname(__file__), '../../resources/thea_icon.png')
         self.setWindowIcon(QtGui.QIcon(relative_path_to_icon))
 
-        self.setCentralWidget(CentralWidget())
+        self.setCentralWidget(self._centralWidget)
 
         self.init_menu()
 
