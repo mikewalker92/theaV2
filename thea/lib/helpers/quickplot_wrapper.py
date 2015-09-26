@@ -1,7 +1,7 @@
 import iris.quickplot as quickplot
 
 
-class QuickplotHelper(object):
+class QuickplotWrapper(object):
     """
     Convenience class which wraps the Iris Quickplot module.
     """

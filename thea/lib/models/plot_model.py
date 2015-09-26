@@ -7,7 +7,7 @@ class PlotModel(BaseModel):
     """
 
     def __init__(self):
-        super(BaseModel, self).__init__()
+        super(PlotModel, self).__init__()
 
         self._current_plot = None
 

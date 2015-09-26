@@ -2,6 +2,10 @@
 Entry point to Thea.
 """
 
+import matplotlib
+matplotlib.use('Qt4Agg')
+matplotlib.rcParams['backend.qt4'] = 'PySide'
+
 import warnings
 # We wish to reduce output to the terminal when the program is running.
 from thea.lib.config.application_config import ApplicationConfig
@@ -15,15 +19,12 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from PySide import QtGui
 
-import thea.lib.views.main_window as main_window
-
 
 def main():
     app = QtGui.QApplication(sys.argv)
 
-    application_config = ApplicationConfig()
+    _ = ApplicationConfig()
 
-    _ = main_window.MainWindow(application_config.get_central_widget())
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

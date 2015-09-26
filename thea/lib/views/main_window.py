@@ -1,11 +1,5 @@
-import matplotlib
-
-matplotlib.use('Qt4Agg')
-matplotlib.rcParams['backend.qt4'] = 'PySide'
-
 import os
 from PySide import QtGui
-from thea.lib.views.central_widget import CentralWidget
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -16,9 +10,11 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, central_widget):
+    def __init__(self, central_widget, cube_controller):
         super(MainWindow, self).__init__()
+
         self._centralWidget = central_widget
+        self._cube_controller = cube_controller
 
         self.init_ui()
         self.set_up_actions()
@@ -52,4 +48,4 @@ class MainWindow(QtGui.QMainWindow):
     def open_file(self):
         filename, _ = QtGui.QFileDialog.getOpenFileName(self, 'Open File')
 
-        self.controller.open_file(filename)
+        self._cube_controller.load_cubes(filename)

@@ -4,7 +4,7 @@ from thea.lib.models.base_model import BaseModel
 class CubeSelectionModel(BaseModel):
 
     def __init__(self):
-        super(BaseModel, self).__init__()
+        super(CubeSelectionModel, self).__init__()
 
         self._cube = None
 

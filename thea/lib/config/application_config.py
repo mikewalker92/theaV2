@@ -1,8 +1,11 @@
+from thea.lib.controllers.cube_controller import CubeController
 from thea.lib.controllers.plot_controller import PlotController
 from thea.lib.helpers.cube_collapser import CubeCollapser
-from thea.lib.helpers.quickplot_helper import QuickplotHelper
+from thea.lib.helpers.iris_wrapper import IrisWrapper
+from thea.lib.helpers.quickplot_wrapper import QuickplotWrapper
 from thea.lib.models.cube_selection_model import CubeSelectionModel
 from thea.lib.models.plot_model import PlotModel
+from thea.lib.services.cube_loading_service import CubeLoadingService
 from thea.lib.services.plot_service import PlotService
 from thea.lib.views.central_widget import CentralWidget
 from thea.lib.views.cube_data_widget import CubeDataWidget
@@ -14,6 +17,7 @@ from thea.lib.views.minor_axes_widget import MinorAxesWidget
 from thea.lib.views.options_widget import OptionsWidget
 from thea.lib.views.select_cube_widget import SelectCubeWidget
 from thea.lib.views.update_plot_widget import UpdatePlotWidget
+from thea.lib.views.main_window import MainWindow
 
 
 class ApplicationConfig(object):
@@ -24,7 +28,8 @@ class ApplicationConfig(object):
     def __init__(self):
         # Helpers
         self._cube_collapser = CubeCollapser()
-        self._quickplot_helper = QuickplotHelper()
+        self._quickplot_wrapper = QuickplotWrapper()
+        self._iris_wrapper = IrisWrapper()
 
         # Models
         self._plot_model = PlotModel()
@@ -35,14 +40,24 @@ class ApplicationConfig(object):
             self.get_quickplot_helper(),
             self.get_plot_model())
 
+        self._cube_loading_service = CubeLoadingService(
+            self.get_iris_wrapper(),
+            self.get_plot_service(),
+            self.get_cube_selection_model())
+
         # Controllers
         self._plot_controller = PlotController(
             self.get_plot_service(),
             self.get_cube_selection_model(),
             self.get_cube_collapser())
 
+        self._cube_controller = CubeController(
+            self.get_cube_loading_service())
+
         # Views
-        self._matplotlib_widget = MatplotlibWidget()
+        self._matplotlib_widget = MatplotlibWidget(
+            self.get_plot_model())
+
         self._full_cube_information_widget = CubeInformationWidget()
         self._cube_slice_information_widget = CubeInformationWidget()
         self._cube_data_widget = CubeDataWidget()
@@ -69,6 +84,10 @@ class ApplicationConfig(object):
             self.get_cube_viewer_widget(),
             self.get_options_widget())
 
+        self._main_window = MainWindow(
+            self.get_central_widget(),
+            self.get_cube_controller())
+
     """
     Helpers
     """
@@ -76,7 +95,10 @@ class ApplicationConfig(object):
         return self._cube_collapser
 
     def get_quickplot_helper(self):
-        return self._quickplot_helper
+        return self._quickplot_wrapper
+
+    def get_iris_wrapper(self):
+        return self._iris_wrapper
 
     """
     Models
@@ -93,11 +115,17 @@ class ApplicationConfig(object):
     def get_plot_service(self):
         return self._plot_service
 
+    def get_cube_loading_service(self):
+        return self._cube_loading_service
+
     """
     Controllers
     """
     def get_plot_controller(self):
         return self._plot_controller
+
+    def get_cube_controller(self):
+        return self._cube_controller
 
     """
     Views
@@ -134,4 +162,7 @@ class ApplicationConfig(object):
 
     def get_central_widget(self):
         return self._central_widget
+
+    def get_main_window(self):
+        return self._main_window
 
