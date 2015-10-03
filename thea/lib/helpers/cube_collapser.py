@@ -3,7 +3,7 @@ class CubeCollapser(object):
         pass
 
     @staticmethod
-    def collapse_cube(cube_model):
-        return cube_model.get_cube()
+    def collapse_cube(cube_selection_model):
+        return cube_selection_model.get_cube()
 
 
