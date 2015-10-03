@@ -10,11 +10,11 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, central_widget, cube_controller):
+    def __init__(self, central_widget, switch_cube_controller):
         super(MainWindow, self).__init__()
 
         self._centralWidget = central_widget
-        self._cube_controller = cube_controller
+        self._switch_cube_controller = switch_cube_controller
 
         self.init_ui()
         self.set_up_actions()
@@ -48,4 +48,4 @@ class MainWindow(QtGui.QMainWindow):
     def open_file(self):
         filename, _ = QtGui.QFileDialog.getOpenFileName(self, 'Open File')
 
-        self._cube_controller.load_cubes(filename)
+        self._switch_cube_controller.load_file(filename)

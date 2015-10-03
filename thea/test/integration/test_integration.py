@@ -7,7 +7,7 @@ from thea.test.integration.application_test_config import TestConfig
 class TestIntegration(TestCase):
 
     # controllers
-    cube_controller = None
+    switch_cube_controller = None
     plot_controller = None
 
     # helpers
@@ -22,7 +22,7 @@ class TestIntegration(TestCase):
     def setUp(self):
         test_config = TestConfig()
 
-        self.cube_controller = test_config.get_cube_controller()
+        self.switch_cube_controller = test_config.get_switch_cube_controller()
         self.plot_controller = test_config.get_plot_controller()
 
         self.iris_wrapper = test_config.get_iris_wrapper()
@@ -37,25 +37,27 @@ class TestIntegration(TestCase):
         filename = "path/to/cubes"
         new_plot = mock()
         cube = mock(Cube)
+        cubes = [cube]
 
-        when(self.iris_wrapper).load_cubes(filename).thenReturn([cube])
+        when(self.iris_wrapper).load_cubes(filename).thenReturn(cubes)
         when(self.quickplot_wrapper).pcolormesh(cube).thenReturn(new_plot)
 
         # When
-        self.cube_controller.load_cubes(filename)
+        self.switch_cube_controller.load_file(filename)
 
         # Then
-        self.assertEqual(new_plot, self.plot_model.get_current_plot())
+        self.assertEqual(new_plot, self.plot_model.current_plot)
 
     def test_plotModel_updatePlot_plotIsUpdated(self):
         # Given
         updated_plot = mock()
         cube = mock(Cube)
-        self.cube_selection_model.set_cube(cube)
+        cubes = [cube]
+        self.cube_selection_model.cubes = cubes
         when(self.quickplot_wrapper).pcolormesh(cube).thenReturn(updated_plot)
 
         # When
         self.plot_controller.update_plot()
 
         # Then
-        self.assertEqual(updated_plot, self.plot_model.get_current_plot())
+        self.assertEqual(updated_plot, self.plot_model.current_plot)

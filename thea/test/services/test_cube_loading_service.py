@@ -4,7 +4,6 @@ from mockito import mock, when, verify
 from thea.lib.helpers.iris_wrapper import IrisWrapper
 from thea.lib.models.cube_selection_model import CubeSelectionModel
 from thea.lib.services.cube_loading_service import CubeLoadingService
-from thea.lib.services.plot_service import PlotService
 
 
 class TestCubeLoadingService(TestCase):
@@ -12,25 +11,20 @@ class TestCubeLoadingService(TestCase):
     cube_loading_service = None
 
     mock_iris_wrapper = mock(IrisWrapper)
-    mock_plot_service = mock(PlotService)
-    mock_cube_selection_model = mock(CubeSelectionModel)
+    cube_selection_model = None
 
     def setUp(self):
-        self.cube_loading_service = CubeLoadingService(
-            self.mock_iris_wrapper,
-            self.mock_plot_service,
-            self.mock_cube_selection_model)
+        self.cube_selection_model = CubeSelectionModel()
+        self.cube_loading_service = CubeLoadingService(self.mock_iris_wrapper)
 
     def test_filename_when_loadCubes_getsCubeAndUpdatesPlot(self):
         # Given
         filename = "path/to/cubes"
-        cube = mock(Cube)
-        cubes = [cube]
+        cubes = [mock(Cube)]
         when(self.mock_iris_wrapper).load_cubes(filename).thenReturn(cubes)
 
         # When
-        self.cube_loading_service.load_cubes(filename)
+        self.cube_loading_service.load_cubes(filename, self.cube_selection_model)
 
         # Then
-        verify(self.mock_cube_selection_model).set_cube(cube)
-        verify(self.mock_plot_service).update_plot(cube)
+        self.assertEqual(cubes, self.cube_selection_model.cubes)

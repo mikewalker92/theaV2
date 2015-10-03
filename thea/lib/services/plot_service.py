@@ -1,10 +1,10 @@
 
 class PlotService(object):
-    def __init__(self, quickplot_wrapper, plot_model):
-        self.quickplot_wrapper = quickplot_wrapper
+    def __init__(self, quickplot_wrapper):
+        self._quickplot_wrapper = quickplot_wrapper
 
-        self.plot_model = plot_model
+    def update_plot(self, cube_selection_model, plot_model):
+        cube = cube_selection_model.selected_cube()
 
-    def update_plot(self, cube):
-        new_plot = self.quickplot_wrapper.pcolormesh(cube)
-        self.plot_model.set_current_plot(new_plot)
+        new_plot = self._quickplot_wrapper.pcolormesh(cube)
+        plot_model.current_plot = new_plot

@@ -1,5 +1,5 @@
 from mockito import mock
-from thea.lib.controllers.cube_controller import CubeController
+from thea.lib.controllers.switch_cube_controller import SwitchCubeController
 from thea.lib.controllers.plot_controller import PlotController
 from thea.lib.helpers.cube_collapser import CubeCollapser
 from thea.lib.helpers.iris_wrapper import IrisWrapper
@@ -27,22 +27,22 @@ class TestConfig(object):
 
         # Services
         self._plot_service = PlotService(
-            self.get_quickplot_wrapper(),
-            self.get_plot_model())
+            self.get_quickplot_wrapper())
 
         self._cube_loading_service = CubeLoadingService(
-            self.get_iris_wrapper(),
-            self.get_plot_service(),
-            self.get_cube_selection_model())
+            self.get_iris_wrapper())
 
         # Controllers
         self._plot_controller = PlotController(
             self.get_plot_service(),
             self.get_cube_selection_model(),
-            self.get_cube_collapser())
+            self.get_plot_model())
 
-        self._cube_controller = CubeController(
-            self.get_cube_loading_service())
+        self._switch_cube_controller = SwitchCubeController(
+            self.get_cube_loading_service(),
+            self.get_plot_service(),
+            self.get_cube_selection_model(),
+            self.get_plot_model())
 
     """
     Helpers
@@ -80,8 +80,8 @@ class TestConfig(object):
     def get_plot_controller(self):
         return self._plot_controller
 
-    def get_cube_controller(self):
-        return self._cube_controller
+    def get_switch_cube_controller(self):
+        return self._switch_cube_controller
 
     """
     Views

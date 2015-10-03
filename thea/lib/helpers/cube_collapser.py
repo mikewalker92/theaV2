@@ -4,6 +4,6 @@ class CubeCollapser(object):
 
     @staticmethod
     def collapse_cube(cube_selection_model):
-        return cube_selection_model.get_cube()
+        return cube_selection_model.selected_cube()
 
 

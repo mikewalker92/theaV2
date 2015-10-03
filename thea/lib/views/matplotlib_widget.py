@@ -39,6 +39,6 @@ class MatplotlibWidget(TheaWidget):
         self._plot_model.subscribe_update_function(self.update_figure_from_model)
 
     def update_figure_from_model(self):
-        if self._figure != self._plot_model.get_current_plot():
-            self._figure = self._plot_model.get_current_plot()
+        if self._figure != self._plot_model.current_plot:
+            self._figure = self._plot_model.current_plot
             self._canvas.draw()

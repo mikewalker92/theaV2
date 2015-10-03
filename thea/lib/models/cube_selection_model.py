@@ -6,11 +6,20 @@ class CubeSelectionModel(BaseModel):
     def __init__(self):
         super(CubeSelectionModel, self).__init__()
 
-        self._cube = None
+        self._cubes = None
+        self._cube_index = 0
 
-    def set_cube(self, cube):
-        self._cube = cube
-        self.announce_update()
+    @property
+    def cubes(self):
+        return self._cubes
 
-    def get_cube(self):
-        return self._cube
+    @cubes.setter
+    def cubes(self, value):
+        self._cubes = value
+
+    @property
+    def cube_index(self):
+        return self.cube_index
+
+    def selected_cube(self):
+        return self._cubes[self._cube_index]

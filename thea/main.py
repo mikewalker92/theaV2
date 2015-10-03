@@ -26,10 +26,12 @@ def main():
 
     try:
         _, initial_filename = sys.argv
-        application_config.get_cube_loading_service().load_cubes(initial_filename)
+        application_config.get_switch_cube_controller().load_file(initial_filename)
     except ValueError:
         # If initial_filename is not set, nothing needs to be done.
-        pass
+        # TODO - setting filename for dev purposes only
+        initial_filename = '/home/mike/Programming/Scitools/iris-test-data/test_data/PP/simple_pp/global.pp'
+        application_config.get_switch_cube_controller().load_file(initial_filename)
 
     sys.exit(app.exec_())
 

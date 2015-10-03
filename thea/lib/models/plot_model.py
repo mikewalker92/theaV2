@@ -11,9 +11,11 @@ class PlotModel(BaseModel):
 
         self._current_plot = None
 
-    def set_current_plot(self, current_plot):
-        self._current_plot = current_plot
-        self.announce_update()
-
-    def get_current_plot(self):
+    @property
+    def current_plot(self):
         return self._current_plot
+
+    @current_plot.setter
+    def current_plot(self, value):
+        self._current_plot = value
+        self.announce_update()
