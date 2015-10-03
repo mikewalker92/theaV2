@@ -22,10 +22,17 @@ from PySide import QtGui
 
 def main():
     app = QtGui.QApplication(sys.argv)
+    application_config = ApplicationConfig()
 
-    _ = ApplicationConfig()
+    try:
+        _, initial_filename = sys.argv
+        application_config.get_cube_loading_service().load_cubes(initial_filename)
+    except ValueError:
+        # If initial_filename is not set, nothing needs to be done.
+        pass
 
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()
