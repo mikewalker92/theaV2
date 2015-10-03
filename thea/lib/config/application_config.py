@@ -1,6 +1,7 @@
 from thea.lib.controllers.switch_cube_controller import SwitchCubeController
 from thea.lib.controllers.plot_controller import PlotController
 from thea.lib.helpers.cube_collapser import CubeCollapser
+from thea.lib.helpers.cube_utils import CubeUtils
 from thea.lib.helpers.iris_wrapper import IrisWrapper
 from thea.lib.helpers.quickplot_wrapper import QuickplotWrapper
 from thea.lib.models.cube_selection_model import CubeSelectionModel
@@ -30,6 +31,9 @@ class ApplicationConfig(object):
         self._cube_collapser = CubeCollapser()
         self._quickplot_wrapper = QuickplotWrapper()
         self._iris_wrapper = IrisWrapper()
+
+        self._cube_utils = CubeUtils(
+            self.get_iris_wrapper())
 
         # Models
         self._plot_model = PlotModel()
@@ -61,7 +65,11 @@ class ApplicationConfig(object):
         self._full_cube_information_widget = CubeInformationWidget()
         self._cube_slice_information_widget = CubeInformationWidget()
         self._cube_data_widget = CubeDataWidget()
-        self._select_cube_widget = SelectCubeWidget()
+
+        self._select_cube_widget = SelectCubeWidget(
+            self.get_cube_selection_model(),
+            self.get_cube_utils())
+
         self._major_axes_widget = MajorAxesWidget()
         self._minor_axes_widget = MinorAxesWidget()
 
@@ -99,6 +107,9 @@ class ApplicationConfig(object):
 
     def get_iris_wrapper(self):
         return self._iris_wrapper
+
+    def get_cube_utils(self):
+        return self._cube_utils
 
     """
     Models

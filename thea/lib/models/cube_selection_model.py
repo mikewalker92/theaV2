@@ -16,6 +16,7 @@ class CubeSelectionModel(BaseModel):
     @cubes.setter
     def cubes(self, value):
         self._cubes = value
+        self.announce_update()
 
     @property
     def cube_index(self):
