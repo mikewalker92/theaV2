@@ -1,9 +1,7 @@
 from PySide import QtGui
 
 
-class Colors:
-    def __init__(self):
-        pass
+class Colors(object):
 
     background = QtGui.QColor(255, 255, 255)
     foreground = QtGui.QColor(0, 0, 0)
