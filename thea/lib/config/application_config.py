@@ -59,19 +59,26 @@ class ApplicationConfig(object):
             self.get_plot_model())
 
         # Views
-        self._matplotlib_widget = MatplotlibWidget(
-            self.get_plot_model())
-
-        self._full_cube_information_widget = CubeInformationWidget()
-        self._cube_slice_information_widget = CubeInformationWidget()
-        self._cube_data_widget = CubeDataWidget()
 
         self._select_cube_widget = SelectCubeWidget(
             self.get_cube_selection_model(),
             self.get_cube_utils())
 
         self._major_axes_widget = MajorAxesWidget()
+
         self._minor_axes_widget = MinorAxesWidget()
+
+        self._options_widget = OptionsWidget(
+            self.get_select_cube_widget(),
+            self.get_major_axes_widget(),
+            self.get_minor_axes_widget())
+
+        self._matplotlib_widget = MatplotlibWidget(
+            self.get_plot_model())
+
+        self._full_cube_information_widget = CubeInformationWidget()
+        self._cube_slice_information_widget = CubeInformationWidget()
+        self._cube_data_widget = CubeDataWidget()
 
         self._cube_viewer_widget = CubeViewerWidget(
             self.get_full_cube_information_widget(),
@@ -80,12 +87,6 @@ class ApplicationConfig(object):
 
         self._update_plot_widget = UpdatePlotWidget(
             self.get_plot_controller())
-
-        self._options_widget = OptionsWidget(
-            self.get_select_cube_widget(),
-            self.get_major_axes_widget(),
-            self.get_minor_axes_widget(),
-            self.get_update_plot_widget())
 
         self._central_widget = CentralWidget(
             self.get_matplotlib_widget(),

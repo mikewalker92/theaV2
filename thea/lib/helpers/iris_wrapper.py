@@ -1,5 +1,4 @@
 import iris
-from iris.cube import Cube
 
 
 class IrisWrapper(object):
