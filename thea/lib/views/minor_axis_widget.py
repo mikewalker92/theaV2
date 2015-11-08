@@ -1,5 +1,5 @@
 from PySide import QtGui
-from thea.lib.views.thea_widgets import TheaWidget
+from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors
 
 
@@ -7,8 +7,8 @@ class MinorAxisWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self):
-        super(MinorAxisWidget, self).__init__()
+    def __init__(self, renderer):
+        super(MinorAxisWidget, self).__init__(renderer)
 
         self.init_ui()
 
@@ -29,4 +29,4 @@ class MinorAxisWidget(TheaWidget):
 
         self.setLayout(grid)
 
-        self.show()
+        self.show_view()

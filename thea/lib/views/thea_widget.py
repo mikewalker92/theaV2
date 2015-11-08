@@ -1,11 +1,13 @@
 from PySide import QtGui
+from thea.lib.helpers.renderer import Renderer
 from thea.resources.thea_colors import Colors
 
 
 class TheaWidget(QtGui.QWidget):
-    def __init__(self):
+    def __init__(self, renderer):
         super(TheaWidget, self).__init__()
 
+        self._renderer = renderer
         self.setAutoFillBackground(True)
         self.set_background_color(Colors.background)
         self.set_foreground_color(Colors.highlight)
@@ -19,3 +21,6 @@ class TheaWidget(QtGui.QWidget):
         palette = self.palette()
         palette.setColor(self.foregroundRole(), color)
         self.setPalette(palette)
+
+    def show_view(self):
+        self._renderer.show(self)

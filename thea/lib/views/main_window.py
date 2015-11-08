@@ -10,8 +10,10 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, central_widget, switch_cube_controller):
+    def __init__(self, renderer, central_widget, switch_cube_controller):
         super(MainWindow, self).__init__()
+
+        self._renderer = renderer
 
         self._centralWidget = central_widget
         self._switch_cube_controller = switch_cube_controller
@@ -20,7 +22,7 @@ class MainWindow(QtGui.QMainWindow):
         self.set_up_actions()
 
     def init_ui(self):
-        self.showMaximized()
+        self._renderer.show_maximized(self)
         self.setWindowTitle('Thea')
 
         relative_path_to_icon = os.path.join(os.path.dirname(__file__), '../../resources/thea_icon.png')
@@ -29,8 +31,6 @@ class MainWindow(QtGui.QMainWindow):
         self.setCentralWidget(self._centralWidget)
 
         self.init_menu()
-
-        self.show()
 
     def init_menu(self):
         menu_bar = self.menuBar()

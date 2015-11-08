@@ -1,13 +1,13 @@
 from PySide import QtGui
-from thea.lib.views.thea_widgets import TheaWidget
+from thea.lib.views.thea_widget import TheaWidget
 
 
 class SelectCubeWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self, cube_selection_model, cube_utils):
-        super(SelectCubeWidget, self).__init__()
+    def __init__(self, renderer, cube_selection_model, cube_utils):
+        super(SelectCubeWidget, self).__init__(renderer)
 
         self._cubes_in_file = []
         self._cube_selection_combo = QtGui.QComboBox()
@@ -19,7 +19,7 @@ class SelectCubeWidget(TheaWidget):
         self.bind_events()
 
     def init_ui(self):
-        self.setMaximumHeight(80)
+        self.setMaximumHeight(88)
 
         grid = QtGui.QGridLayout()
 
@@ -28,7 +28,7 @@ class SelectCubeWidget(TheaWidget):
 
         self.setLayout(grid)
 
-        self.show()
+        self.show_view()
 
     def bind_events(self):
         self._cube_selection_model.subscribe_update_function(self.update_cube_list_from_model)
