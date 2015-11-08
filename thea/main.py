@@ -24,6 +24,9 @@ def main():
     app = QtGui.QApplication(sys.argv)
     application_config = ApplicationConfig()
 
+    # start the app by creating the main window.
+    application_config.get_main_window()
+
     try:
         _, initial_filename = sys.argv
         application_config.get_switch_cube_controller().load_file(initial_filename)
