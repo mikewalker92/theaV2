@@ -11,5 +11,5 @@ setup(
     author='mike',
     author_email='',
     description='',
-    requires=['PySide', 'iris', 'mockito']
+    requires=['PySide', 'iris', 'mockito', 'matplotlib']
 )

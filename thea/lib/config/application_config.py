@@ -73,7 +73,7 @@ class ApplicationConfig(object):
 
         return self._cube_collapser
 
-    def get_quickplot_helper(self):
+    def get_quickplot_wrapper(self):
         if self._quickplot_wrapper is None:
             self._quickplot_wrapper = QuickplotWrapper()
 
@@ -119,7 +119,7 @@ class ApplicationConfig(object):
     def get_plot_service(self):
         if self._plot_service is None:
             self._plot_service = PlotService(
-                self.get_quickplot_helper())
+                self.get_quickplot_wrapper())
 
         return self._plot_service
 

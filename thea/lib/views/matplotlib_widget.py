@@ -1,5 +1,3 @@
-
-
 from PySide import QtGui
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas

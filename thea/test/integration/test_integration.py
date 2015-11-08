@@ -1,7 +1,13 @@
+import matplotlib
+matplotlib.use('Qt4Agg')
+matplotlib.rcParams['backend.qt4'] = 'PySide'
+
+from PySide import QtGui
 from unittest import TestCase
 from iris.cube import Cube
 from mockito import mock, when
-from thea.test.integration.application_test_config import TestConfig
+import sys
+from thea.test.integration.integration_test_config import IntegrationTestConfig
 
 
 class TestIntegration(TestCase):
@@ -14,13 +20,24 @@ class TestIntegration(TestCase):
     iris_wrapper = None
     quickplot_wrapper = None
     cube_collapser = None
+    renderer = None
 
     # models
     plot_model = None
     cube_selection_model = None
 
+    @classmethod
+    def setUpClass(cls, ):
+        # Create a QApplication to run the tests in.
+        app = QtGui.QApplication(sys.argv)
+
     def setUp(self):
-        test_config = TestConfig()
+        test_config = IntegrationTestConfig()
+
+        # Start the app by creating the main window.
+        self._main_window = test_config.get_main_window()
+
+        self.renderer = test_config.get_renderer()
 
         self.switch_cube_controller = test_config.get_switch_cube_controller()
         self.plot_controller = test_config.get_plot_controller()
@@ -61,3 +78,7 @@ class TestIntegration(TestCase):
 
         # Then
         self.assertEqual(updated_plot, self.plot_model.current_plot)
+
+    def tearDown(self):
+        self.renderer.reset()
+
