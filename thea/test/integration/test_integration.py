@@ -4,13 +4,21 @@ matplotlib.rcParams['backend.qt4'] = 'PySide'
 
 from PySide import QtGui
 from unittest import TestCase
-from iris.cube import Cube
+from iris.cube import Cube, iris
 from mockito import mock, when
 import sys
 from thea.test.integration.integration_test_config import IntegrationTestConfig
 
 
+cube_location = "test-cubes.pp"
+two_dimensional_test_cube = Cube([
+    [1, 2, 3, 4, 5],
+    [5, 4, 3, 2, 1]])
+
+
 class TestIntegration(TestCase):
+
+    test_cubes = iris.load_cubes(cube_location)
 
     # controllers
     switch_cube_controller = None
@@ -30,6 +38,8 @@ class TestIntegration(TestCase):
     def setUpClass(cls, ):
         # Create a QApplication to run the tests in.
         app = QtGui.QApplication(sys.argv)
+
+        iris.save(two_dimensional_test_cube, cube_location)
 
     def setUp(self):
         test_config = IntegrationTestConfig()
@@ -51,16 +61,11 @@ class TestIntegration(TestCase):
 
     def test_filename_openFile_loadsFileAndCreatesPlot(self):
         # Given
-        filename = "path/to/cubes"
         new_plot = mock()
-        cube = mock(Cube)
-        cubes = [cube]
-
-        when(self.iris_wrapper).load_cubes(filename).thenReturn(cubes)
-        when(self.quickplot_wrapper).pcolormesh(cube).thenReturn(new_plot)
+        when(self.quickplot_wrapper.pcolormesh(two_dimensional_test_cube)).thenReturn(new_plot)
 
         # When
-        self.switch_cube_controller.load_file(filename)
+        self.switch_cube_controller.load_file(cube_location)
 
         # Then
         self.assertEqual(new_plot, self.plot_model.current_plot)
@@ -81,4 +86,3 @@ class TestIntegration(TestCase):
 
     def tearDown(self):
         self.renderer.reset()
-

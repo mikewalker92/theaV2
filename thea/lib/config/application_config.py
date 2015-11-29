@@ -7,7 +7,9 @@ from thea.lib.helpers.quickplot_wrapper import QuickplotWrapper
 from thea.lib.helpers.renderer import Renderer
 from thea.lib.models.cube_selection_model import CubeSelectionModel
 from thea.lib.models.plot_model import PlotModel
+from thea.lib.services.cube_axes_service import CubeAxesService
 from thea.lib.services.cube_loading_service import CubeLoadingService
+from thea.lib.services.cube_metadata_service import CubeMetadataService
 from thea.lib.services.plot_service import PlotService
 from thea.lib.views.central_widget import CentralWidget
 from thea.lib.views.cube_data_widget import CubeDataWidget
@@ -43,6 +45,8 @@ class ApplicationConfig(object):
     # Services
     _plot_service = None
     _cube_loading_service = None
+    _cube_axes_service = None
+    _cube_metadata_service = None
 
     # Controllers
     _plot_controller = None
@@ -126,9 +130,23 @@ class ApplicationConfig(object):
     def get_cube_loading_service(self):
         if self._cube_loading_service is None:
             self._cube_loading_service = CubeLoadingService(
+                self.get_cube_axes_service(),
+                self.get_cube_metadata_service(),
                 self.get_iris_wrapper())
 
         return self._cube_loading_service
+
+    def get_cube_axes_service(self):
+        if self._cube_axes_service is None:
+            self._cube_axes_service = CubeAxesService()
+
+        return self._cube_axes_service
+
+    def get_cube_metadata_service(self):
+        if self._cube_metadata_service is None:
+            self._cube_metadata_service = CubeMetadataService()
+
+        return self._cube_metadata_service
 
     """
     Controllers

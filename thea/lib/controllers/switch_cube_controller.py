@@ -6,5 +6,8 @@ class SwitchCubeController(object):
         self._plot_model = plot_model
 
     def load_file(self, filename):
-        self._cube_loading_service.load_cubes(filename, self._cube_selection_model)
+        self._cube_loading_service.load_file(filename, self._cube_selection_model)
         self._plot_service.update_plot(self._cube_selection_model, self._plot_model)
+
+    def load_cube(self):
+        self._cube_loading_service.load_cube()

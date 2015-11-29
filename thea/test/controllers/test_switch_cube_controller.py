@@ -33,5 +33,5 @@ class SwitchCubeControllerTests(TestCase):
         self.switch_cube_controller.load_file(filename)
 
         # Then
-        verify(self.mock_cube_loading_service).load_cubes(filename, self.mock_cube_selection_model)
+        verify(self.mock_cube_loading_service).load_file(filename, self.mock_cube_selection_model)
         verify(self.mock_plot_service).update_plot(self.mock_cube_selection_model, self.mock_plot_model)
