@@ -7,8 +7,8 @@ class MinorAxisWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self, renderer):
-        super(MinorAxisWidget, self).__init__(renderer)
+    def __init__(self):
+        super(MinorAxisWidget, self).__init__()
 
         self.init_ui()
 
@@ -26,7 +26,3 @@ class MinorAxisWidget(TheaWidget):
         grid.addWidget(QtGui.QLabel('Value:'), 1, 2)
         grid.addWidget(QtGui.QComboBox(), 1, 3)
         grid.addWidget(QtGui.QFrame(), 2, 0, 1, 4)
-
-        self.setLayout(grid)
-
-        self.show_view()

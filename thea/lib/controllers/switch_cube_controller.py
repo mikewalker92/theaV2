@@ -1,13 +1,26 @@
+from thea.lib.models.cube_selection_model import get_cube_selection_model
+from thea.lib.models.plot_model import get_plot_model
+from thea.lib.services.cube_loading_service import load_file
+from thea.lib.services.plot_service import update_plot
+
+
 class SwitchCubeController(object):
-    def __init__(self, cube_loading_service, plot_service, cube_selection_model, plot_model):
-        self._cube_loading_service = cube_loading_service
-        self._plot_service = plot_service
+    def __init__(self, cube_selection_model, plot_model):
         self._cube_selection_model = cube_selection_model
         self._plot_model = plot_model
 
     def load_file(self, filename):
-        self._cube_loading_service.load_file(filename, self._cube_selection_model)
-        self._plot_service.update_plot(self._cube_selection_model, self._plot_model)
+        load_file(filename, self._cube_selection_model)
+        update_plot(self._cube_selection_model, self._plot_model)
 
     def load_cube(self):
-        self._cube_loading_service.load_cube()
+        pass
+
+
+_switch_cube_controller = SwitchCubeController(
+    get_cube_selection_model(),
+    get_plot_model())
+
+
+def get_switch_cube_controller():
+    return _switch_cube_controller

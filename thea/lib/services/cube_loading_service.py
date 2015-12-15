@@ -1,17 +1,18 @@
-class CubeLoadingService(object):
-    def __init__(self, cube_axes_service, cube_metadata_service, iris_wrapper):
-        self._cube_axes_service = cube_axes_service
-        self._cube_metadata_service = cube_metadata_service
-        self._iris_wrapper = iris_wrapper
+from thea.lib.helpers.cube_utils import load_cubes
+from thea.lib.services.cube_axes_service import populate_major_axes, populate_minor_axes
+from thea.lib.services.cube_metadata_service import populate_metadata
 
-    def load_file(self, filename, cube_selection_model):
-        cubes = self._iris_wrapper.load_cubes(filename)
-        cube_selection_model.cubes = cubes
-        cube_selection_model.cube_index = 0
-        self.load_cube(cube_selection_model)
 
-    def load_cube(self, cube_selection_model):
-        cube = cube_selection_model.selected_cube()
-        self._cube_axes_service.populate_major_axes(cube)
-        self._cube_axes_service.populate_minor_axes(cube)
-        self._cube_metadata_service.populate_metadata(cube)
+def load_file(filename, cube_selection_model):
+    cubes = load_cubes(filename)
+    cube_selection_model.cubes = cubes
+    cube_selection_model.cube_index = 0
+    load_cube(cube_selection_model)
+
+
+def load_cube(cube_selection_model):
+    cube = cube_selection_model.selected_cube()
+    populate_major_axes(cube)
+    populate_minor_axes(cube)
+    populate_metadata(cube)
+

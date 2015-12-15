@@ -1,6 +1,7 @@
 from PySide import QtGui
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from thea.lib.models.plot_model import get_plot_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -9,8 +10,8 @@ class MatplotlibWidget(TheaWidget):
     A widget for displaying matplotlib plots.
     """
 
-    def __init__(self, renderer, plot_model):
-        super(MatplotlibWidget, self).__init__(renderer)
+    def __init__(self, plot_model):
+        super(MatplotlibWidget, self).__init__()
 
         self._figure = None
         self._canvas = None
@@ -31,8 +32,6 @@ class MatplotlibWidget(TheaWidget):
         vbl.addWidget(self._canvas)
         self.setLayout(vbl)
 
-        self.show_view()
-
     def bind_events(self):
         self._plot_model.subscribe_update_function(self.update_figure_from_model)
 
@@ -40,3 +39,11 @@ class MatplotlibWidget(TheaWidget):
         if self._figure != self._plot_model.current_plot:
             self._figure = self._plot_model.current_plot
             self._canvas.draw()
+
+
+_matplotlib_widget = MatplotlibWidget(
+    get_plot_model())
+
+
+def get_matplotlib_widget():
+    return _matplotlib_widget

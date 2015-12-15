@@ -4,8 +4,8 @@ from thea.lib.views.thea_widget import TheaWidget
 
 
 class MajorAxesWidget(TheaWidget):
-    def __init__(self, renderer):
-        super(MajorAxesWidget, self).__init__(renderer)
+    def __init__(self):
+        super(MajorAxesWidget, self).__init__()
 
         self._x_axis_combo = QComboBox()
         self._y_axis_combo = QComboBox()
@@ -22,4 +22,9 @@ class MajorAxesWidget(TheaWidget):
 
         self.setLayout(grid)
 
-        self.show_view()
+
+_major_axes_widget = MajorAxesWidget()
+
+
+def get_major_axes_widget():
+    return _major_axes_widget

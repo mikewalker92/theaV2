@@ -1,13 +1,7 @@
-import matplotlib.pyplot as pyplot
+from thea.lib.helpers.plotting_utils import colormesh
 
 
-class PlotService(object):
-    def __init__(self, quickplot_wrapper):
-        self._quickplot_wrapper = quickplot_wrapper
-
-    def update_plot(self, cube_selection_model, plot_model):
-        cube = cube_selection_model.selected_cube()
-
-        pyplot.clf()
-        new_plot = self._quickplot_wrapper.pcolormesh(cube)
-        plot_model.current_plot = new_plot
+def update_plot(cube_selection_model, plot_model):
+    cube = cube_selection_model.selected_cube()
+    new_plot = colormesh(cube)
+    plot_model.current_plot = new_plot

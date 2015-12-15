@@ -8,7 +8,6 @@ class PlotModel(BaseModel):
 
     def __init__(self):
         super(PlotModel, self).__init__()
-
         self._current_plot = None
 
     @property
@@ -19,3 +18,10 @@ class PlotModel(BaseModel):
     def current_plot(self, value):
         self._current_plot = value
         self.announce_update()
+
+
+_plot_model = PlotModel()
+
+
+def get_plot_model():
+    return _plot_model

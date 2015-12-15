@@ -1,10 +1,17 @@
-class CubeUtils(object):
+import iris
 
-    def __init__(self, iris_wrapper):
-        self._iris = iris_wrapper
 
-    def get_names_from_cubes(self, cubes):
-        return [self.get_name_from_cube(cube) for cube in cubes]
+def load_cubes(filename):
+    return iris.load_cubes(filename)
 
-    def get_name_from_cube(self, cube):
-        return self._iris.cube_name(cube)
+
+def cube_name(cube):
+    return cube.standard_name
+
+
+def get_names_from_cubes(cubes):
+    return [cube_name(cube) for cube in cubes]
+
+
+def collapse_cube(cube_selection_model):
+    return cube_selection_model.selected_cube()

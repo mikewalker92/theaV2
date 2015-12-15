@@ -1,8 +1,8 @@
 from PySide import QtGui
 from PySide.QtCore import Qt
-from thea.lib.views.cube_viewer_widget import CubeViewerWidget
-from thea.lib.views.options_widget import OptionsWidget
-from thea.lib.views.matplotlib_widget import MatplotlibWidget
+from thea.lib.views.cube_viewer_widget import get_cube_viewer_widget
+from thea.lib.views.matplotlib_widget import get_matplotlib_widget
+from thea.lib.views.options_widget import create_options_widget
 from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors
 
@@ -12,8 +12,8 @@ class CentralWidget(TheaWidget):
     The CentralWidget divides the window into rough sections using splitters, and defines
     child widgets to populate the sections.
     """
-    def __init__(self, renderer, matplotlib_widget, cube_viewer_widget, options_widget):
-        super(CentralWidget, self).__init__(renderer)
+    def __init__(self, matplotlib_widget, cube_viewer_widget, options_widget):
+        super(CentralWidget, self).__init__()
 
         self._matplotlib_widget = matplotlib_widget
         self._cube_viewer_widget = cube_viewer_widget
@@ -33,4 +33,12 @@ class CentralWidget(TheaWidget):
         grid.addWidget(self._options_widget, 1, 1, 2, 1)
         self.setLayout(grid)
 
-        self.show_view()
+
+_central_widget = CentralWidget(
+    get_matplotlib_widget(),
+    get_cube_viewer_widget(),
+    create_options_widget())
+
+
+def get_central_widget():
+    return _central_widget

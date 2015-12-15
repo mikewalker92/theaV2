@@ -28,3 +28,10 @@ class CubeSelectionModel(BaseModel):
 
     def selected_cube(self):
         return self._cubes[self._cube_index]
+
+
+_cube_selection_model = CubeSelectionModel()
+
+
+def get_cube_selection_model():
+    return _cube_selection_model

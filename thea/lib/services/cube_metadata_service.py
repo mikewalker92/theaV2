@@ -1,3 +1,4 @@
-class CubeMetadataService(object):
-    def populate_metadata(self, cube):
+
+
+def populate_metadata(cube):
         pass

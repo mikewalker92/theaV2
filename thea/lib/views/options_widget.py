@@ -1,18 +1,17 @@
 from PySide import QtGui
 from PySide.QtGui import QTabWidget
-from thea.lib.views.minor_axes_widget import MinorAxesWidget
-from thea.lib.views.major_axes_widget import MajorAxesWidget
-from thea.lib.views.cube_options_widget import CubeOptionsWidget
+from thea.lib.views.cube_options_widget import get_cube_options_widget
+from thea.lib.views.plot_options_widget import get_plot_options_widget
 from thea.lib.views.thea_widget import TheaWidget
-from thea.lib.views.update_plot_widget import UpdatePlotWidget
+from thea.lib.views.update_plot_widget import get_update_plot_widget
 
 
 class OptionsWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self, renderer, cube_options_widget, plot_options_widget, update_plot_widget):
-        super(OptionsWidget, self).__init__(renderer)
+    def __init__(self, cube_options_widget, plot_options_widget, update_plot_widget):
+        super(OptionsWidget, self).__init__()
 
         self._cube_options_widget = cube_options_widget
         self._plot_options_widget = plot_options_widget
@@ -34,4 +33,12 @@ class OptionsWidget(TheaWidget):
 
         self.setLayout(grid)
 
-        self.show_view()
+
+_options_widget = OptionsWidget(
+    get_cube_options_widget(),
+    get_plot_options_widget(),
+    get_update_plot_widget())
+
+
+def create_options_widget():
+    return _options_widget

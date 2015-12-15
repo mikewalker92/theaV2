@@ -36,3 +36,10 @@ class CubeModel(object):
     @minor_axes.setter
     def minor_axes(self, minor_axes):
         self._minor_axes = minor_axes
+
+
+_cube_model = CubeModel()
+
+
+def get_cube_model():
+    return _cube_model

@@ -1,7 +1,7 @@
 from unittest import TestCase
 from iris.cube import Cube
 from mockito import mock, when
-from thea.lib.helpers.quickplot_wrapper import QuickplotWrapper
+from thea.lib.helpers.plotting_utils import QuickplotWrapper
 from thea.lib.models.cube_selection_model import CubeSelectionModel
 from thea.lib.models.plot_model import PlotModel
 from thea.lib.services.plot_service import PlotService

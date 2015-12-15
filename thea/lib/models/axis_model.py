@@ -18,3 +18,9 @@ class AxisModel(object):
     @index.setter
     def index(self, index):
         self._index = index
+
+_axis_model = AxisModel()
+
+
+def get_axis_model():
+    return _axis_model
