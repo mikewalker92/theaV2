@@ -26,3 +26,5 @@ class MinorAxisWidget(TheaWidget):
         grid.addWidget(QtGui.QLabel('Value:'), 1, 2)
         grid.addWidget(QtGui.QComboBox(), 1, 3)
         grid.addWidget(QtGui.QFrame(), 2, 0, 1, 4)
+
+        self.setLayout(grid)
