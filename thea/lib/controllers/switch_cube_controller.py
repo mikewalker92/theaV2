@@ -9,6 +9,12 @@ class SwitchCubeController(object):
         self._cube_selection_model = cube_selection_model
         self._plot_model = plot_model
 
+    def open_file(self, filename):
+        cubes = load_file(filename)
+
+
+
+
     def load_file(self, filename):
         load_file(filename, self._cube_selection_model)
         update_plot(self._cube_selection_model, self._plot_model)

@@ -1,5 +1,5 @@
 from PySide import QtGui
-from thea.lib.controllers.plot_controller import get_plot_controller
+from thea.lib.controllers.update_plot_controller import get_update_plot_controller
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -29,7 +29,7 @@ class UpdatePlotWidget(TheaWidget):
 
 
 _update_plot_widget = UpdatePlotWidget(
-    get_plot_controller())
+    get_update_plot_controller())
 
 
 def get_update_plot_widget():
