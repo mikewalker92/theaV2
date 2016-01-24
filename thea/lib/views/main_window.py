@@ -1,7 +1,14 @@
 import os
 from PySide import QtGui
-from thea.lib.controllers.switch_cube_controller import get_switch_cube_controller
+from thea.lib.controllers.open_file_controller import get_open_file_controller
 from thea.lib.views.central_widget import get_central_widget
+
+from thea.lib.config.properties import properties
+
+if properties().render_ui:
+    from thea.lib.helpers import renderer
+else:
+    import thea.lib.helpers.mock_renderer as renderer
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -12,17 +19,17 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, central_widget, switch_cube_controller):
+    def __init__(self, central_widget, open_file_controller):
         super(MainWindow, self).__init__()
 
         self._centralWidget = central_widget
-        self._switch_cube_controller = switch_cube_controller
+        self.open_file_controller = open_file_controller
 
         self.init_ui()
         self.set_up_actions()
 
     def init_ui(self):
-        self.showMaximized()
+        renderer.show_maximised(self)
         self.setWindowTitle('Thea')
 
         relative_path_to_icon = os.path.join(os.path.dirname(__file__), '../../resources/thea_icon.png')
@@ -47,16 +54,12 @@ class MainWindow(QtGui.QMainWindow):
 
     def open_file(self):
         filename, _ = QtGui.QFileDialog.getOpenFileName(self, 'Open File')
-
-        self._switch_cube_controller.load_file(filename)
-
-    def get_switch_cube_controller(self):
-        return self._switch_cube_controller
+        self.open_file_controller.load_file(filename)
 
 
 _main_window = MainWindow(
     get_central_widget(),
-    get_switch_cube_controller())
+    get_open_file_controller())
 
 
 def get_main_window():

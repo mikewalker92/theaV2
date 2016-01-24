@@ -1,7 +1,7 @@
 from PySide import QtGui
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from thea.lib.models.plot_model import get_plot_model
+from thea.lib.helpers.model_provider import get_model_provider
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -10,12 +10,12 @@ class MatplotlibWidget(TheaWidget):
     A widget for displaying matplotlib plots.
     """
 
-    def __init__(self, plot_model):
+    def __init__(self, model_provider):
         super(MatplotlibWidget, self).__init__()
 
         self._figure = None
         self._canvas = None
-        self._plot_model = plot_model
+        self._plot_model = model_provider.plot_model
 
         self.init_ui()
         self.bind_events()
@@ -42,7 +42,7 @@ class MatplotlibWidget(TheaWidget):
 
 
 _matplotlib_widget = MatplotlibWidget(
-    get_plot_model())
+    get_model_provider())
 
 
 def get_matplotlib_widget():

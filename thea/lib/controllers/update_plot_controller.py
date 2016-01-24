@@ -1,21 +1,18 @@
-from thea.lib.models.cube_selection_model import get_cube_selection_model
-from thea.lib.models.plot_model import get_plot_model
-from thea.lib.services.plot_service import update_plot
+from thea.lib.helpers.model_provider import get_model_provider
+from thea.lib.services.update_plot_service import update_plot
 
 
 class UpdatePlotController(object):
 
-    def __init__(self, cube_selection_model, plot_model):
-        self._cube_selection_model = cube_selection_model
-        self._plot_model = plot_model
+    def __init__(self, model_provider):
+        self._options_model = model_provider.options_model
+        self._plot_model = model_provider.plot_model
 
     def update_plot(self):
-        update_plot(self._cube_selection_model, self._plot_model)
+        update_plot(self._plot_model, self._options_model)
 
 
-_update_plot_controller = UpdatePlotController(
-    get_cube_selection_model,
-    get_plot_model)
+_update_plot_controller = UpdatePlotController(get_model_provider())
 
 
 def get_update_plot_controller():

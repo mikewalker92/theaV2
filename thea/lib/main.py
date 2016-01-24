@@ -1,11 +1,20 @@
 """
 Entry point to Thea.
 """
+import getopt
+
+import sys
+
+from PySide import QtGui
+app = QtGui.QApplication(sys.argv)
 
 import matplotlib
-
 matplotlib.use('Qt4Agg')
 matplotlib.rcParams['backend.qt4'] = 'PySide'
+
+from thea.lib.config.properties import properties
+from thea.lib.controllers.open_file_controller import get_open_file_controller
+from thea.lib.views.main_window import get_main_window
 
 import warnings
 # We wish to reduce output to the terminal when the program is running.
@@ -13,31 +22,38 @@ import warnings
 warnings.filterwarnings("ignore")
 
 import os.path
-import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from PySide import QtGui
-app = QtGui.QApplication(sys.argv)
 
-from thea.lib.views.main_window import get_main_window
-
-
-def main():
-    # start the app by creating the main window.
-    main_window = get_main_window()
+def main(input_args):
+    filename = None
+    render_ui = True
 
     try:
-        _, initial_filename = sys.argv
-        main_window.get_switch_cube_controller().load_file(initial_filename)
-    except ValueError:
-        # If initial_filename is not set, nothing needs to be done.
-        # TODO - setting filename for dev purposes only
-        initial_filename = '/home/mike/Programming/Scitools/iris-test-data/test_data/PP/simple_pp/global.pp'
-        main_window.get_switch_cube_controller().load_file(initial_filename)
+        options, _ = getopt.getopt(input_args, "f:", ["file=", "mock-renderer"])
+    except getopt.GetoptError:
+        print "usage: -f <filename> --file<filename> --mock-renderer"
+        sys.exit(2)
+
+    for option, argument in options:
+        if option == "-f":
+            filename = argument
+        elif option == "--file":
+            filename = argument
+        elif option == "--mock-renderer":
+            render_ui = False
+
+    properties().render_ui = render_ui
+
+    # start the app by creating the main window.
+    get_main_window()
+
+    if filename is not None:
+        get_open_file_controller().open_file(filename)
 
     sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
