@@ -1,4 +1,5 @@
 from PySide import QtGui
+from thea.lib.helpers.cube_utils import get_cube_names
 from thea.lib.helpers.model_provider import get_model_provider
 from thea.lib.views.thea_widget import TheaWidget
 
@@ -32,12 +33,10 @@ class SelectCubeWidget(TheaWidget):
         self._cube_selection_model.subscribe_update_function(self.update_cube_list_from_model)
 
     def update_cube_list_from_model(self):
-        pass
-        # if self._cubes_in_file != self._cube_selection_model.cubes:
-        #     self._cubes_in_file = self._cube_selection_model.cubes
-        #     self._cube_selection_combo.clear()
-        #     cube_names = get_names_from_cubes(self._cubes_in_file)
-        #     self._cube_selection_combo.addItems(cube_names)
+        self._cubes_in_file = self._cube_selection_model.cubes
+        self._cube_selection_combo.clear()
+        cube_names = get_cube_names(self._cubes_in_file)
+        self._cube_selection_combo.addItems(cube_names)
 
 
 _select_cube_widget = SelectCubeWidget(

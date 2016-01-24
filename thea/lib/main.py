@@ -16,11 +16,6 @@ from thea.lib.config.properties import properties
 from thea.lib.controllers.open_file_controller import get_open_file_controller
 from thea.lib.views.main_window import get_main_window
 
-import warnings
-# We wish to reduce output to the terminal when the program is running.
-
-warnings.filterwarnings("ignore")
-
 import os.path
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

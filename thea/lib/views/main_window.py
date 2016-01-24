@@ -54,7 +54,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def open_file(self):
         filename, _ = QtGui.QFileDialog.getOpenFileName(self, 'Open File')
-        self.open_file_controller.load_file(filename)
+        self.open_file_controller.open_file(filename)
 
 
 _main_window = MainWindow(

@@ -15,3 +15,6 @@ class PlotModel(BaseModel):
     def current_plot(self, plot):
         self._current_plot = plot
         self.announce_update()
+
+    def clear(self):
+        self._current_plot = None

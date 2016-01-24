@@ -39,3 +39,9 @@ class OptionsModel(BaseModel):
     @property
     def plot_options(self):
         return self._plot_options
+
+    def clear(self):
+        self._cubes = []
+        self._cube_index = 0
+        self._axes_model.clear()
+        self._plot_options.clear()
