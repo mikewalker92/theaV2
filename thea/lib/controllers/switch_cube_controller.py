@@ -6,6 +6,9 @@ from thea.lib.services.update_plot_service import update_plot
 
 class SwitchCubeController(object):
     def __init__(self, model_provider):
+        """
+        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        """
         self._information_model = model_provider.information_model
         self._plot_model = model_provider.plot_model
         self._options_model = model_provider.options_model
@@ -20,4 +23,7 @@ _switch_cube_controller = SwitchCubeController(get_model_provider())
 
 
 def get_switch_cube_controller():
+    """
+    :rtype: SwitchCubeController
+    """
     return _switch_cube_controller

@@ -9,3 +9,9 @@ class BaseModel(object):
     def announce_update(self):
         for function in self.__update_functions:
             function()
+
+    def clear(self):
+        """
+        This method should be overridden where appropriate.
+        """
+        pass

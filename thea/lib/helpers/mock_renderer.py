@@ -1,5 +1,5 @@
 """
-    A mock renderer which will not render the views.
+A mock renderer which will not render the views.
 """
 
 

@@ -17,4 +17,7 @@ _cube_data_widget = CubeDataWidget()
 
 
 def get_cube_data_widget():
+    """
+    :rtype: CubeDataWidget
+    """
     return _cube_data_widget

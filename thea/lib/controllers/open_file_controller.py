@@ -7,11 +7,17 @@ from thea.lib.services.update_plot_service import update_plot
 
 class OpenFileController(object):
     def __init__(self, model_provider):
+        """
+        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        """
         self._options_model = model_provider.options_model
         self._information_model = model_provider.information_model
         self._plot_model = model_provider.plot_model
 
     def open_file(self, filename):
+        """
+        :type filename: str
+        """
         clear_models([self._options_model, self._information_model, self._plot_model])
 
         load_file(filename, self._options_model)
@@ -27,4 +33,7 @@ _open_file_controller = OpenFileController(get_model_provider())
 
 
 def get_open_file_controller():
+    """
+    :rtype: OpenFileController
+    """
     return _open_file_controller

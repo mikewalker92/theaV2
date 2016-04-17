@@ -13,6 +13,11 @@ class CentralWidget(TheaWidget):
     child widgets to populate the sections.
     """
     def __init__(self, matplotlib_widget, cube_viewer_widget, options_widget):
+        """
+        :type matplotlib_widget: thea.lib.views.matplotlib_widget.MatplotlibWidget
+        :type cube_viewer_widget: thea.lib.views.cube_viewer_widget.CubeViewerWidget
+        :type options_widget: thea.lib.views.options_widget.OptionsWidget
+        """
         super(CentralWidget, self).__init__()
 
         self._matplotlib_widget = matplotlib_widget
@@ -33,7 +38,6 @@ class CentralWidget(TheaWidget):
         grid.addWidget(self._options_widget, 1, 1, 2, 1)
         self.setLayout(grid)
 
-
 _central_widget = CentralWidget(
     get_matplotlib_widget(),
     get_cube_viewer_widget(),
@@ -41,4 +45,7 @@ _central_widget = CentralWidget(
 
 
 def get_central_widget():
+    """
+    :rtype: CentralWidget
+    """
     return _central_widget

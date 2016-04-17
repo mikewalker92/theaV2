@@ -11,6 +11,9 @@ class MatplotlibWidget(TheaWidget):
     """
 
     def __init__(self, model_provider):
+        """
+        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        """
         super(MatplotlibWidget, self).__init__()
 
         self._figure = None
@@ -46,4 +49,7 @@ _matplotlib_widget = MatplotlibWidget(
 
 
 def get_matplotlib_widget():
+    """
+    :rtype: MatplotlibWidget
+    """
     return _matplotlib_widget

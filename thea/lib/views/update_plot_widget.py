@@ -9,6 +9,9 @@ class UpdatePlotWidget(TheaWidget):
     """
 
     def __init__(self, plot_controller):
+        """
+        :type plot_controller: thea.lib.controllers.update_plot_controller.UpdatePlotController
+        """
         super(UpdatePlotWidget, self).__init__()
 
         self._update_button = QtGui.QPushButton('Update Plot')
@@ -33,4 +36,7 @@ _update_plot_widget = UpdatePlotWidget(
 
 
 def get_update_plot_widget():
+    """
+    :rtype: UpdatePlotWidget
+    """
     return _update_plot_widget

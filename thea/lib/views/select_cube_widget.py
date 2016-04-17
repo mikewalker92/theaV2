@@ -9,9 +9,11 @@ class SelectCubeWidget(TheaWidget):
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
     def __init__(self, model_provider):
+        """
+        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        """
         super(SelectCubeWidget, self).__init__()
 
-        self._cubes_in_file = []
         self._cube_selection_combo = QtGui.QComboBox()
 
         self._cube_selection_model = model_provider.options_model
@@ -30,12 +32,11 @@ class SelectCubeWidget(TheaWidget):
         self.setLayout(grid)
 
     def bind_events(self):
-        self._cube_selection_model.subscribe_update_function(self.update_cube_list_from_model)
+        self._cube_selection_model.subscribe_update_function(self.update_cube_list)
 
-    def update_cube_list_from_model(self):
-        self._cubes_in_file = self._cube_selection_model.cubes
+    def update_cube_list(self):
         self._cube_selection_combo.clear()
-        cube_names = get_cube_names(self._cubes_in_file)
+        cube_names = get_cube_names(self._cube_selection_model.cubes)
         self._cube_selection_combo.addItems(cube_names)
 
 
@@ -44,4 +45,7 @@ _select_cube_widget = SelectCubeWidget(
 
 
 def get_select_cube_widget():
+    """
+    :rtype: SelectCubeWidget
+    """
     return _select_cube_widget

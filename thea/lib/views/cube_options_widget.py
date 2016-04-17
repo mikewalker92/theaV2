@@ -10,6 +10,11 @@ class CubeOptionsWidget(TheaWidget):
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
     def __init__(self, select_cube_widget, major_axes_widget, minor_axes_widget):
+        """
+        :type select_cube_widget: thea.lib.views.select_cube_widget.SelectCubeWidget
+        :type major_axes_widget: thea.lib.views.major_axes_widget.MajorAxesWidget
+        :type minor_axes_widget: thea.lib.views.minor_axes_widget.MinorAxesWidget
+        """
         super(CubeOptionsWidget, self).__init__()
 
         self._cubes_in_file = []

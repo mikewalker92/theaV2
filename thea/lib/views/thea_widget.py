@@ -1,4 +1,5 @@
 from PySide import QtGui
+from thea.lib.helpers import renderer
 from thea.resources.thea_colors import Colors
 
 

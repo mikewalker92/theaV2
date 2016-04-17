@@ -11,6 +11,7 @@ class MajorAxesWidget(TheaWidget):
         self._y_axis_combo = QComboBox()
 
         self.init_ui()
+        self.bind_events()
 
     def init_ui(self):
         self.setMaximumHeight(110)
@@ -22,9 +23,18 @@ class MajorAxesWidget(TheaWidget):
 
         self.setLayout(grid)
 
+    def bind_events(self):
+        pass
+
+    def update_x_axis_combo(self):
+        self._x_axis_combo.clear()
+
 
 _major_axes_widget = MajorAxesWidget()
 
 
 def get_major_axes_widget():
+    """
+    :rtype: MajorAxesWidget
+    """
     return _major_axes_widget

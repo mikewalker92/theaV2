@@ -27,4 +27,7 @@ _minor_axes_widget = MinorAxesWidget()
 
 
 def get_minor_axes_widget():
+    """
+    :rtype: MinorAxesWidget
+    """
     return _minor_axes_widget

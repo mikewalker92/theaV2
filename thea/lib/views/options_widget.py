@@ -11,6 +11,11 @@ class OptionsWidget(TheaWidget):
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
     def __init__(self, cube_options_widget, plot_options_widget, update_plot_widget):
+        """
+        :type cube_options_widget: thea.lib.views.cube_options_widget.CubeOptionsWidget
+        :type plot_options_widget: thea.lib.views.plot_options_widget.PlotOptionsWidget
+        :type update_plot_widget: thea.lib.views.update_plot_widget.UpdatePlotWidget
+        """
         super(OptionsWidget, self).__init__()
 
         self._cube_options_widget = cube_options_widget
@@ -41,4 +46,7 @@ _options_widget = OptionsWidget(
 
 
 def create_options_widget():
+    """
+    :rtype: OptionsWidget
+    """
     return _options_widget

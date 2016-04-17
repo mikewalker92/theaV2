@@ -20,6 +20,10 @@ class MainWindow(QtGui.QMainWindow):
     action_open = None
 
     def __init__(self, central_widget, open_file_controller):
+        """
+        :type central_widget: thea.lib.views.central_widget.CentralWidget
+        :type open_file_controller: thea.lib.controllers.open_file_controller.OpenFileController
+        """
         super(MainWindow, self).__init__()
 
         self._centralWidget = central_widget
@@ -63,4 +67,7 @@ _main_window = MainWindow(
 
 
 def get_main_window():
+    """
+    :rtype: MainWindow
+    """
     return _main_window
