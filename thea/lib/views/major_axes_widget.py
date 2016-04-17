@@ -1,11 +1,17 @@
 from PySide import QtGui
 from PySide.QtGui import QComboBox, QLabel
+from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
 class MajorAxesWidget(TheaWidget):
-    def __init__(self):
+    def __init__(self, view_model):
+        """
+        :type view_model: thea.lib.models.view_model.ViewModel
+        """
         super(MajorAxesWidget, self).__init__()
+
+        self._cube_options = view_model.options.axes_model
 
         self._x_axis_combo = QComboBox()
         self._y_axis_combo = QComboBox()
@@ -30,7 +36,7 @@ class MajorAxesWidget(TheaWidget):
         self._x_axis_combo.clear()
 
 
-_major_axes_widget = MajorAxesWidget()
+_major_axes_widget = MajorAxesWidget(get_view_model())
 
 
 def get_major_axes_widget():

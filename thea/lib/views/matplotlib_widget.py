@@ -1,7 +1,7 @@
 from PySide import QtGui
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from thea.lib.helpers.model_provider import get_model_provider
+from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -10,15 +10,15 @@ class MatplotlibWidget(TheaWidget):
     A widget for displaying matplotlib plots.
     """
 
-    def __init__(self, model_provider):
+    def __init__(self, view_model):
         """
-        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        :type view_model: thea.lib.models.view_model.ViewModel
         """
         super(MatplotlibWidget, self).__init__()
 
         self._figure = None
         self._canvas = None
-        self._plot_model = model_provider.plot_model
+        self._plot_model = view_model.plot
 
         self.init_ui()
         self.bind_events()
@@ -45,7 +45,7 @@ class MatplotlibWidget(TheaWidget):
 
 
 _matplotlib_widget = MatplotlibWidget(
-    get_model_provider())
+    get_view_model())
 
 
 def get_matplotlib_widget():

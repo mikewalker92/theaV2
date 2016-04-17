@@ -1,25 +1,25 @@
-from thea.lib.helpers.model_provider import get_model_provider
 from thea.lib.helpers.model_utils import clear_models
+from thea.lib.models.view_model import get_view_model
 from thea.lib.services.populate_view_service import populate_view
 from thea.lib.services.update_plot_service import update_plot
 
 
 class SwitchCubeController(object):
-    def __init__(self, model_provider):
+    def __init__(self, view_model):
         """
-        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        :type view_model: thea.lib.models.view_model.ViewModel
         """
-        self._information_model = model_provider.information_model
-        self._plot_model = model_provider.plot_model
-        self._options_model = model_provider.options_model
+        self._information = view_model.information
+        self._plot = view_model.plot
+        self._options = view_model.options
 
     def switch_cube(self):
-        clear_models([self._information_model, self._plot_model, self._options_model])
-        populate_view(self._options_model, self._information_model)
-        update_plot(self._plot_model, self._options_model)
+        clear_models([self._information, self._plot, self._options])
+        populate_view(self._options, self._information)
+        update_plot(self._plot, self._options)
 
 
-_switch_cube_controller = SwitchCubeController(get_model_provider())
+_switch_cube_controller = SwitchCubeController(get_view_model())
 
 
 def get_switch_cube_controller():

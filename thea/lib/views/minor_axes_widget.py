@@ -1,5 +1,4 @@
 from PySide import QtGui, QtCore
-from thea.lib.views.minor_axis_widget import MinorAxisWidget
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -17,8 +16,6 @@ class MinorAxesWidget(TheaWidget):
         grid.setAlignment(QtCore.Qt.AlignTop)
 
         grid.addWidget(QtGui.QLabel('Minor Axes'), 0, 0)
-        grid.addWidget(MinorAxisWidget(), 1, 0)
-        grid.addWidget(MinorAxisWidget(), 2, 0)
 
         self.setLayout(grid)
 

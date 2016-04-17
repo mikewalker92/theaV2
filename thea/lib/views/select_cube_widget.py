@@ -1,6 +1,6 @@
 from PySide import QtGui
 from thea.lib.helpers.cube_utils import get_cube_names
-from thea.lib.helpers.model_provider import get_model_provider
+from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -8,15 +8,15 @@ class SelectCubeWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
-    def __init__(self, model_provider):
+    def __init__(self, view_model):
         """
-        :type model_provider: thea.lib.helpers.model_provider.ModelProvider
+        :type view_model: thea.lib.models.view_model.ViewModel
         """
         super(SelectCubeWidget, self).__init__()
 
         self._cube_selection_combo = QtGui.QComboBox()
 
-        self._cube_selection_model = model_provider.options_model
+        self._cube_selection_model = view_model
 
         self.init_ui()
         self.bind_events()
@@ -41,7 +41,7 @@ class SelectCubeWidget(TheaWidget):
 
 
 _select_cube_widget = SelectCubeWidget(
-    get_model_provider())
+    get_view_model())
 
 
 def get_select_cube_widget():
