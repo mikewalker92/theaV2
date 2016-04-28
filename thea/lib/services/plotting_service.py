@@ -5,7 +5,7 @@ from matplotlib import pyplot
 def plot(cube, plot_options):
     """
     :type cube: iris.cube.Cube
-    :type plot_options: thea.lib.models.plot_options_model.PlotOptions
+    :type plot_options: thea.lib.models.plot_options_model.PlotOptionsModel
     :rtype: Any
     """
     clear_figure()

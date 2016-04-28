@@ -16,7 +16,7 @@ class SelectCubeWidget(TheaWidget):
 
         self._cube_selection_combo = QtGui.QComboBox()
 
-        self._cube_selection_model = view_model
+        self._cube_options = view_model.options.cube_options
 
         self.init_ui()
         self.bind_events()
@@ -32,11 +32,11 @@ class SelectCubeWidget(TheaWidget):
         self.setLayout(grid)
 
     def bind_events(self):
-        self._cube_selection_model.subscribe_update_function(self.update_cube_list)
+        self._cube_options.subscribe_update_function(self.update_cube_list)
 
     def update_cube_list(self):
         self._cube_selection_combo.clear()
-        cube_names = get_cube_names(self._cube_selection_model.cubes)
+        cube_names = get_cube_names(self._cube_options.cubes)
         self._cube_selection_combo.addItems(cube_names)
 
 

@@ -21,11 +21,19 @@ class ViewModel(BaseModel):
         self._options = OptionsModel()
 
     @property
-    def current_cube(self):
+    def cube(self):
         """
         :rtype: iris.cube.Cube
         """
         return self._cube
+
+    @cube.setter
+    def cube(self, value):
+        """
+        :param value: iris.cube.Cube
+        """
+        self.announce_update()
+        self._cube = value
 
     @property
     def plot(self):
@@ -47,6 +55,13 @@ class ViewModel(BaseModel):
         :rtype: OptionsModel
         """
         return self._options
+
+    def clear(self):
+        self.cube = None
+        self.plot.clear()
+        self.information.clear()
+        self.options.clear()
+
 
 _view_model = ViewModel()
 
