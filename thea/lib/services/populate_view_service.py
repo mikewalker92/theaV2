@@ -35,4 +35,4 @@ def _populate_information_model(cube, information_model):
     :type cube: iris.cube.Cube
     :type information_model: thea.lib.models.information_model.InformationModel
     """
-    pass
+    information_model.printed_cube = str(cube)
