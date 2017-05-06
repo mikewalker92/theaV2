@@ -1,8 +1,9 @@
 from PySide import QtGui
 from PySide.QtCore import Qt
-from thea.lib.views.cube_viewer_widget import get_cube_viewer_widget
-from thea.lib.views.matplotlib_widget import get_matplotlib_widget
-from thea.lib.views.options_widget import create_options_widget
+
+from thea.lib.views.readout.cube_viewer_widget import get_cube_viewer_widget
+from thea.lib.views.plot.matplotlib_widget import get_matplotlib_widget
+from thea.lib.views.selection.user_selection_widget import create_user_selection_widget
 from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors
 
@@ -41,7 +42,7 @@ class CentralWidget(TheaWidget):
 _central_widget = CentralWidget(
     get_matplotlib_widget(),
     get_cube_viewer_widget(),
-    create_options_widget())
+    create_user_selection_widget())
 
 
 def get_central_widget():

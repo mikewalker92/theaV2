@@ -1,7 +1,7 @@
 from PySide import QtGui
-from thea.lib.views.cube_data_widget import get_cube_data_widget
-from thea.lib.views.cube_information_widget import get_cube_information_widget
 
+from thea.lib.views.readout.data.cube_data_widget import get_cube_data_widget
+from thea.lib.views.readout.cube_readout_widget import get_cube_readout_widget
 from thea.lib.views.thea_widget import TheaWidget
 
 
@@ -35,8 +35,8 @@ class CubeViewerWidget(TheaWidget):
 
 
 _cube_viewer_widget = CubeViewerWidget(
-    get_cube_information_widget(),
-    get_cube_information_widget(),
+    get_cube_readout_widget(),
+    get_cube_readout_widget(),
     get_cube_data_widget())
 
 

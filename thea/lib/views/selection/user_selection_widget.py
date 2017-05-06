@@ -1,12 +1,13 @@
 from PySide import QtGui
 from PySide.QtGui import QTabWidget
-from thea.lib.views.cube_options_widget import get_cube_options_widget
-from thea.lib.views.plot_options_widget import get_plot_options_widget
+
+from thea.lib.views.selection.slice.cube_options_widget import get_cube_options_widget
+from thea.lib.views.selection.plot.plot_options_widget import get_plot_options_widget
 from thea.lib.views.thea_widget import TheaWidget
-from thea.lib.views.update_plot_widget import get_update_plot_widget
+from thea.lib.views.selection.update.update_plot_widget import get_update_plot_widget
 
 
-class OptionsWidget(TheaWidget):
+class UserSelectionWidget(TheaWidget):
     """
     A widget for selecting the cube to plot and changing the settings for the plot.
     """
@@ -16,7 +17,7 @@ class OptionsWidget(TheaWidget):
         :type plot_options_widget: thea.lib.views.plot_options_widget.PlotOptionsWidget
         :type update_plot_widget: thea.lib.views.update_plot_widget.UpdatePlotWidget
         """
-        super(OptionsWidget, self).__init__()
+        super(UserSelectionWidget, self).__init__()
 
         self._cube_options_widget = cube_options_widget
         self._plot_options_widget = plot_options_widget
@@ -39,14 +40,14 @@ class OptionsWidget(TheaWidget):
         self.setLayout(grid)
 
 
-_options_widget = OptionsWidget(
+_user_selection_widget = UserSelectionWidget(
     get_cube_options_widget(),
     get_plot_options_widget(),
     get_update_plot_widget())
 
 
-def create_options_widget():
+def create_user_selection_widget():
     """
-    :rtype: OptionsWidget
+    :rtype: UserSelectionWidget
     """
-    return _options_widget
+    return _user_selection_widget

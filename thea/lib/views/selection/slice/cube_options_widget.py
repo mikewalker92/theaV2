@@ -1,7 +1,8 @@
 from PySide import QtGui
-from thea.lib.views.major_axes_widget import get_major_axes_widget
-from thea.lib.views.minor_axes_widget import get_minor_axes_widget
-from thea.lib.views.select_cube_widget import get_select_cube_widget
+
+from thea.lib.views.selection.slice.major_axes_widget import get_major_axes_widget
+from thea.lib.views.selection.slice.minor_axes_widget import get_minor_axes_widget
+from thea.lib.views.selection.slice.select_cube_widget import get_select_cube_widget
 from thea.lib.views.thea_widget import TheaWidget
 
 

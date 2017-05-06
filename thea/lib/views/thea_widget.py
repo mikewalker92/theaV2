@@ -4,6 +4,10 @@ from thea.resources.thea_colors import Colors
 
 
 class TheaWidget(QtGui.QWidget):
+    """
+    A base class for all custom widgets used in the project.
+    """
+
     def __init__(self):
         super(TheaWidget, self).__init__()
 
