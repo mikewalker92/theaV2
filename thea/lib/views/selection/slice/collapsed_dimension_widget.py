@@ -3,12 +3,12 @@ from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors
 
 
-class MinorAxisWidget(TheaWidget):
+class CollapsedDimensionWidget(TheaWidget):
     """
     A widget for selecting the cube to figure and changing the settings for the figure.
     """
     def __init__(self):
-        super(MinorAxisWidget, self).__init__()
+        super(CollapsedDimensionWidget, self).__init__()
 
         self.init_ui()
 

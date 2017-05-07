@@ -1,5 +1,5 @@
 from PySide.QtGui import QComboBox
-
+from iris.cube import Cube
 
 def get_axis_name(axis):
     # TODO fill this in.
@@ -7,8 +7,11 @@ def get_axis_name(axis):
 
 
 def get_cube_name(cube):
-    # TODO implement this properly
-    return 'cube name'
+    """
+    :type cube: Cube
+    :rtype: str
+    """
+    return cube.name()
 
 
 def get_all_item_names(combo_box):

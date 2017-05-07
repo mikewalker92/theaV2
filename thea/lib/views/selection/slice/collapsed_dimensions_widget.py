@@ -8,7 +8,7 @@ class CollapsedDimensionsWidget(TheaWidget):
     """
     def __init__(self):
         super(CollapsedDimensionsWidget, self).__init__()
-
+        self._collapsed_dimensions = []
         self.init_ui()
 
     def init_ui(self):
@@ -20,11 +20,8 @@ class CollapsedDimensionsWidget(TheaWidget):
         self.setLayout(grid)
 
 
-__minor_axes_widget = CollapsedDimensionsWidget()
-
-
-def get_minor_axes_widget():
+def get_collapsed_dimensions_widget():
     """
     :rtype: CollapsedDimensionsWidget
     """
-    return __minor_axes_widget
+    return CollapsedDimensionsWidget()

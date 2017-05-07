@@ -10,8 +10,8 @@ class LoadFileIntegrationTest(IntegrationBase):
         # Then
         self._wait_for_figure_to_update()
 
-        self._assert_cube_name_is('cube name')
-        self._assert_all_cubes_are(['cube name'])
+        self._assert_cube_name_is('wind_speed_of_gust')
+        self._assert_all_cubes_are(['wind_speed_of_gust'])
         self._assert_x_axis_is('latitude')
         self._assert_y_axis_is('longitude')
         self._assert_no_collapsed_dimensions()

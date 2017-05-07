@@ -13,7 +13,9 @@ import unittest
 from thea.lib.controllers.new_cube_controller import get_new_cube_controller
 from thea.lib.helpers.view_helper_functions import get_all_item_names
 from thea.lib.views.main_window import get_main_window
+from thea.lib.views.selection.user_selection_widget import UserSelectionWidget
 from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
+from thea.lib.views.selection.slice.collapsed_dimension_widget import CollapsedDimensionWidget
 
 
 class IntegrationBase(unittest.TestCase):
@@ -31,11 +33,23 @@ class IntegrationBase(unittest.TestCase):
     def tearDownClass(cls):
         get_main_window().close()
 
+    def __get_user_selection_widget(self):
+        """
+        :rtype: UserSelectionWidget
+        """
+        return get_main_window()._central_widget._user_selection_widget
+
+    def __get_collapsed_dimensions_widget(self):
+        """
+        :rtype: CollapsedDimensionWidget
+        """
+        return self.__get_user_selection_widget()._slice_selection_widget._collapsed_dimensions_widget
+
     def __get_cube_selection_widget(self):
         """
         :rtype: SelectCubeWidget
         """
-        return get_main_window()._central_widget._user_selection_widget._slice_selection_widget._select_cube_widget
+        return self.__get_user_selection_widget()._slice_selection_widget._select_cube_widget
 
     def __get_current_figure(self):
         return get_main_window()._central_widget._matplotlib_widget._canvas.figure
@@ -69,7 +83,11 @@ class IntegrationBase(unittest.TestCase):
         pass
 
     def _assert_no_collapsed_dimensions(self):
-        pass
+        dimensions = self.__get_collapsed_dimensions_widget()._collapsed_dimensions
+        self.assertFalse(
+            dimensions,
+            'Expected there to be no collapsed dimensions, but found {0}'.format(dimensions)
+        )
 
     def _assert_cube_readout_contains(self, term):
         pass
