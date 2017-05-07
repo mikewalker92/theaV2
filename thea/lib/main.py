@@ -13,7 +13,7 @@ matplotlib.use('Qt4Agg')
 matplotlib.rcParams['backend.qt4'] = 'PySide'
 
 from thea.lib.config.properties import properties
-from thea.lib.controllers.open_file_controller import get_open_file_controller
+from thea.lib.controllers.new_cube_controller import get_new_cube_controller
 from thea.lib.views.main_window import get_main_window
 
 import os.path
@@ -45,7 +45,7 @@ def main(input_args):
     get_main_window()
 
     if filename is not None:
-        get_open_file_controller().open_file(filename)
+        get_new_cube_controller().open_file(filename)
 
     sys.exit(app.exec_())
 

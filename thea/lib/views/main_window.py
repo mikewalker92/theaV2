@@ -1,14 +1,7 @@
 import os
 from PySide import QtGui
-from thea.lib.controllers.open_file_controller import get_open_file_controller
-from thea.lib.views.central_widget import get_central_widget
-
-from thea.lib.config.properties import properties
-
-if properties().render_ui:
-    from thea.lib.helpers import renderer
-else:
-    import thea.lib.helpers.mock_renderer as renderer
+from thea.lib.controllers.new_cube_controller import get_new_cube_controller, NewCubeController
+from thea.lib.views.central_widget import get_central_widget, CentralWidget
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -21,8 +14,8 @@ class MainWindow(QtGui.QMainWindow):
 
     def __init__(self, central_widget, open_file_controller):
         """
-        :type central_widget: thea.lib.views.central_widget.CentralWidget
-        :type open_file_controller: thea.lib.controllers.open_file_controller.OpenFileController
+        :type central_widget: CentralWidget
+        :type open_file_controller: NewCubeController
         """
         super(MainWindow, self).__init__()
 
@@ -33,7 +26,7 @@ class MainWindow(QtGui.QMainWindow):
         self.set_up_actions()
 
     def init_ui(self):
-        renderer.show_maximised(self)
+        self.showMaximized()
         self.setWindowTitle('Thea')
 
         relative_path_to_icon = os.path.join(os.path.dirname(__file__), '../../resources/thea_icon.png')
@@ -63,7 +56,7 @@ class MainWindow(QtGui.QMainWindow):
 
 _main_window = MainWindow(
     get_central_widget(),
-    get_open_file_controller())
+    get_new_cube_controller())
 
 
 def get_main_window():

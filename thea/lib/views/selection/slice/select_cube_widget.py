@@ -1,25 +1,23 @@
 from PySide import QtGui
-from thea.lib.helpers.cube_utils import get_cube_names
+from thea.bound.target import BoundComboBox
+from thea.lib.helpers.view_helper_functions import get_cube_name
 from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
 class SelectCubeWidget(TheaWidget):
     """
-    A widget for selecting the cube to plot and changing the settings for the plot.
+    A widget for selecting the cube to figure and changing the settings for the figure.
     """
-    def __init__(self, view_model):
+    def __init__(self, cube_selection_model):
         """
-        :type view_model: thea.lib.models.view_model.ViewModel
+        :type cube_selection_model: thea.lib.models.cube_selection_model.CubeSelectionModel
         """
         super(SelectCubeWidget, self).__init__()
 
-        self._cube_selection_combo = QtGui.QComboBox()
-
-        self._cube_options = view_model.options.cube_options
+        self._cube_selection_combo = BoundComboBox(cube_selection_model.cubes, get_cube_name)
 
         self.init_ui()
-        self.bind_events()
 
     def init_ui(self):
         self.setMaximumHeight(88)
@@ -31,21 +29,14 @@ class SelectCubeWidget(TheaWidget):
 
         self.setLayout(grid)
 
-    def bind_events(self):
-        self._cube_options.subscribe_update_function(self.update_cube_list)
 
-    def update_cube_list(self):
-        self._cube_selection_combo.clear()
-        cube_names = get_cube_names(self._cube_options.cubes)
-        self._cube_selection_combo.addItems(cube_names)
-
-
-_select_cube_widget = SelectCubeWidget(
-    get_view_model())
+__select_cube_widget = SelectCubeWidget(
+    cube_selection_model=get_view_model().user_selection.cube_selection
+)
 
 
 def get_select_cube_widget():
     """
     :rtype: SelectCubeWidget
     """
-    return _select_cube_widget
+    return __select_cube_widget

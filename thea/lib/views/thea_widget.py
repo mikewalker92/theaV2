@@ -1,5 +1,4 @@
 from PySide import QtGui
-from thea.lib.helpers import renderer
 from thea.resources.thea_colors import Colors
 
 
@@ -24,6 +23,3 @@ class TheaWidget(QtGui.QWidget):
         palette = self.palette()
         palette.setColor(self.foregroundRole(), color)
         self.setPalette(palette)
-
-    def show_maximized(self):
-        renderer.show_maximised(self)

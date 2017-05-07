@@ -1,8 +1,8 @@
 from PySide import QtGui
 from PySide.QtCore import Qt
 
-from thea.lib.views.readout.cube_viewer_widget import get_cube_viewer_widget
-from thea.lib.views.plot.matplotlib_widget import get_matplotlib_widget
+from thea.lib.views.details.cube_viewer_widget import get_cube_viewer_widget
+from thea.lib.views.figure.matplotlib_widget import get_matplotlib_widget
 from thea.lib.views.selection.user_selection_widget import create_user_selection_widget
 from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors

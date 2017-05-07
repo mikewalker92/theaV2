@@ -21,23 +21,35 @@ class BoundValue(BoundSource):
 
     def __init__(self, value):
         super(BoundValue, self).__init__()
-        self._value = value
+        self.__value = value
 
     @property
     def value(self):
-        return self._value
+        return self.__value
 
     @value.setter
     def value(self, new_value):
-        self._value = new_value
+        self.__value = new_value
         self._announce_update()
 
 
-class BoundComboSelection(BoundValue):
+class BoundListSelection(BoundSource):
 
-    def __init__(self, items, selected_item):
-        super(BoundComboSelection, self).__init__(items)
+    def __init__(self, items, selected_item=None):
+        super(BoundListSelection, self).__init__()
+
+        self.__items = items
         self.__set_selected_item(selected_item)
+
+    @property
+    def items(self):
+        return self.__items
+
+    @items.setter
+    def items(self, new_items):
+        self.__items = new_items
+        self.__set_selected_item(None)
+        self._announce_update()
 
     @property
     def selected_item(self):
@@ -49,7 +61,9 @@ class BoundComboSelection(BoundValue):
         self._announce_update()
 
     def __set_selected_item(self, item):
-        if item in self._value:
+        if not item:
+            self.__selected_item = None
+        elif item in self.__items:
             self.__selected_item = item
         else:
             raise LookupError('Unable to find item: {0} in selection'.format(item))

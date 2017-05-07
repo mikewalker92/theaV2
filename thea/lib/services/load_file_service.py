@@ -1,9 +1,9 @@
 import iris
 
 
-def load_file(filename, cube_options_model):
+def load_cubes_from_file(filename):
     """
     :type filename: str
-    :type cube_options_model: thea.lib.models.cube_options_model.CubeOptionsModel
+    :rtype iris.cube.Cube
     """
-    cube_options_model.add_cubes(iris.load_cubes(filename))
+    return iris.load_cubes(filename)

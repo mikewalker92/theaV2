@@ -9,7 +9,7 @@ from thea.lib.views.selection.update.update_plot_widget import get_update_plot_w
 
 class UserSelectionWidget(TheaWidget):
     """
-    A widget for selecting the cube to plot and changing the settings for the plot.
+    A widget for selecting the cube to figure and changing the settings for the figure.
     """
     def __init__(self, cube_options_widget, plot_options_widget, update_plot_widget):
         """

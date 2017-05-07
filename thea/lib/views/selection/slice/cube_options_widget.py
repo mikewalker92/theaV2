@@ -1,25 +1,25 @@
 from PySide import QtGui
 
-from thea.lib.views.selection.slice.major_axes_widget import get_major_axes_widget
+from thea.lib.views.selection.slice.axes_widget import get_major_axes_widget
 from thea.lib.views.selection.slice.minor_axes_widget import get_minor_axes_widget
 from thea.lib.views.selection.slice.select_cube_widget import get_select_cube_widget
 from thea.lib.views.thea_widget import TheaWidget
+from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
+from thea.lib.views.selection.slice.axes_widget import AxesWidget
+from thea.lib.views.selection.slice.minor_axes_widget import CollapsedDimensionsWidget
 
 
 class CubeOptionsWidget(TheaWidget):
     """
-    A widget for selecting the cube to plot and changing the settings for the plot.
+    A widget for selecting the cube to figure and changing the settings for the figure.
     """
     def __init__(self, select_cube_widget, major_axes_widget, minor_axes_widget):
         """
-        :type select_cube_widget: thea.lib.views.select_cube_widget.SelectCubeWidget
-        :type major_axes_widget: thea.lib.views.major_axes_widget.MajorAxesWidget
-        :type minor_axes_widget: thea.lib.views.minor_axes_widget.MinorAxesWidget
+        :type select_cube_widget: SelectCubeWidget
+        :type major_axes_widget: AxesWidget
+        :type minor_axes_widget: CollapsedDimensionsWidget
         """
         super(CubeOptionsWidget, self).__init__()
-
-        self._cubes_in_file = []
-        self._cube_selection_combo = QtGui.QComboBox()
 
         self._select_cube_widget = select_cube_widget
         self._major_axes_widget = major_axes_widget
@@ -37,11 +37,12 @@ class CubeOptionsWidget(TheaWidget):
         self.setLayout(grid)
 
 
-_cube_options_widget = CubeOptionsWidget(
-    get_select_cube_widget(),
-    get_major_axes_widget(),
-    get_minor_axes_widget())
+__cube_options_widget = CubeOptionsWidget(
+    select_cube_widget=get_select_cube_widget(),
+    major_axes_widget=get_major_axes_widget(),
+    minor_axes_widget=get_minor_axes_widget()
+)
 
 
 def get_cube_options_widget():
-    return _cube_options_widget
+    return __cube_options_widget

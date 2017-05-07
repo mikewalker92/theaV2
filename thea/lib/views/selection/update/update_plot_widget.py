@@ -5,7 +5,7 @@ from thea.lib.views.thea_widget import TheaWidget
 
 class UpdatePlotWidget(TheaWidget):
     """
-    A widget for selecting the cube to plot and changing the settings for the plot.
+    A widget for selecting the cube to figure and changing the settings for the figure.
     """
 
     def __init__(self, plot_controller):

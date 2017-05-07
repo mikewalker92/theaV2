@@ -2,12 +2,12 @@ from PySide import QtGui, QtCore
 from thea.lib.views.thea_widget import TheaWidget
 
 
-class MinorAxesWidget(TheaWidget):
+class CollapsedDimensionsWidget(TheaWidget):
     """
-    A widget for selecting the cube to plot and changing the settings for the plot.
+    A widget for selecting the cube to figure and changing the settings for the figure.
     """
     def __init__(self):
-        super(MinorAxesWidget, self).__init__()
+        super(CollapsedDimensionsWidget, self).__init__()
 
         self.init_ui()
 
@@ -20,11 +20,11 @@ class MinorAxesWidget(TheaWidget):
         self.setLayout(grid)
 
 
-_minor_axes_widget = MinorAxesWidget()
+__minor_axes_widget = CollapsedDimensionsWidget()
 
 
 def get_minor_axes_widget():
     """
-    :rtype: MinorAxesWidget
+    :rtype: CollapsedDimensionsWidget
     """
-    return _minor_axes_widget
+    return __minor_axes_widget

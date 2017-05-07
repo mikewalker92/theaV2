@@ -1,39 +1,19 @@
-from thea.lib.models.base_model import BaseModel
-from thea.lib.models.information_model import InformationModel
-from thea.lib.models.options_model import OptionsModel
+from thea.lib.models.cube_details_model import CubeDetailsModel
+from thea.lib.models.user_selection_model import UserSelectionModel
 from thea.lib.models.plot_model import PlotModel
 
 
-class ViewModel(BaseModel):
+class ViewModel():
     """
-    :type __cube: iris.cube.Cube
     :type __plot: PlotModel
-    :type __information: InformationModel
-    :type __options: OptionsModel
+    :type __cube_details: CubeDetailsModel
+    :type __user_selection: UserSelectionModel
     """
 
     def __init__(self):
-        super(ViewModel, self).__init__()
-
-        self.__cube = None
         self.__plot = PlotModel()
-        self.__information = InformationModel()
-        self.__options = OptionsModel()
-
-    @property
-    def cube(self):
-        """
-        :rtype: iris.cube.Cube
-        """
-        return self.__cube
-
-    @cube.setter
-    def cube(self, value):
-        """
-        :param value: iris.cube.Cube
-        """
-        self.announce_update()
-        self.__cube = value
+        self.__cube_details = CubeDetailsModel()
+        self.__user_selection = UserSelectionModel()
 
     @property
     def plot(self):
@@ -43,24 +23,18 @@ class ViewModel(BaseModel):
         return self.__plot
 
     @property
-    def information(self):
+    def cube_details(self):
         """
-        :rtype: InformationModel
+        :rtype: CubeDetailsModel
         """
-        return self.__information
+        return self.__cube_details
 
     @property
-    def options(self):
+    def user_selection(self):
         """
-        :rtype: OptionsModel
+        :rtype: UserSelectionModel
         """
-        return self.__options
-
-    def clear(self):
-        self.cube = None
-        self.plot.clear()
-        self.information.clear()
-        self.options.clear()
+        return self.__user_selection
 
 
 __view_model = ViewModel()
