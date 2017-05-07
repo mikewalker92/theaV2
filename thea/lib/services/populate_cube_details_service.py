@@ -1,9 +1,12 @@
+from thea.lib.models.cube_details_model import CubeDetailsModel
+from iris.cube import Cube
+
 
 def populate_cube_details_model(cube_details_model, selected_cube, plotted_slice):
     """
-    :type cube_details_model: thea.lib.models.cube_details_model.CubeDetailsModel
-    :type selected_cube: iris.cube.Cube
-    :type plotted_slice: iris.cube.Cube
+    :type cube_details_model: CubeDetailsModel
+    :type selected_cube: Cube
+    :type plotted_slice: Cube
     """
-    # TODO implement this
-    pass
+    cube_details_model.cube_readout.value = str(selected_cube)
+    cube_details_model.slice_readout.value = str(plotted_slice)

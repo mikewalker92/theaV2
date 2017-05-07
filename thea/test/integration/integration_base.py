@@ -58,6 +58,12 @@ class IntegrationBase(unittest.TestCase):
         """
         return self.__get_user_selection_widget()._slice_selection_widget._axes_widget
 
+    def __get_cube_details_widget(self):
+        """
+        :rtype: CubeViewerWidget
+        """
+        return get_main_window()._central_widget._cube_details_widget
+
     def __get_current_figure(self):
         return get_main_window()._central_widget._matplotlib_widget._canvas.figure
 
@@ -107,10 +113,18 @@ class IntegrationBase(unittest.TestCase):
         )
 
     def _assert_cube_readout_contains(self, term):
-        pass
+        cube_readout = self.__get_cube_details_widget()._cube_readout_widget._cube_readout_text_display.toPlainText()
+        self.assertTrue(
+            term in cube_readout,
+            "Expected the cube readout to contain '{0}', but found '{1}'".format(term, cube_readout)
+        )
 
     def _assert_slice_readout_contains(self, term):
-        pass
+        slice_readout = self.__get_cube_details_widget()._slice_readout_widget._cube_readout_text_display.toPlainText()
+        self.assertTrue(
+            term in slice_readout,
+            "Expected the slice readout to contain '{0}', but found '{1}'".format(term, slice_readout)
+        )
 
     def _assert_slice_data_exists(self):
         pass

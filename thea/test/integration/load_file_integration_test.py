@@ -16,7 +16,7 @@ class LoadFileIntegrationTest(IntegrationBase):
         self._assert_y_axis_is('grid_longitude')
         self._assert_no_collapsed_dimensions()
 
-        self._assert_cube_readout_contains('cube name')
-        self._assert_slice_readout_contains('cube name')
+        self._assert_cube_readout_contains('wind_speed_of_gust / (m s-1)')
+        self._assert_slice_readout_contains('wind_speed_of_gust / (m s-1)')
         self._assert_slice_data_exists()
 
