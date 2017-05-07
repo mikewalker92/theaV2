@@ -60,6 +60,12 @@ class BoundListSelection(BoundSource):
         self.__set_selected_item(item)
         self._announce_update()
 
+    @property
+    def current_index(self):
+        if self.__selected_item:
+            return self.__items.index(self.__selected_item)
+        return 0
+
     def __set_selected_item(self, item):
         if not item:
             self.__selected_item = None

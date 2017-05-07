@@ -12,8 +12,8 @@ class LoadFileIntegrationTest(IntegrationBase):
 
         self._assert_cube_name_is('wind_speed_of_gust')
         self._assert_all_cubes_are(['wind_speed_of_gust'])
-        self._assert_x_axis_is('latitude')
-        self._assert_y_axis_is('longitude')
+        self._assert_x_axis_is('grid_latitude')
+        self._assert_y_axis_is('grid_longitude')
         self._assert_no_collapsed_dimensions()
 
         self._assert_cube_readout_contains('cube name')

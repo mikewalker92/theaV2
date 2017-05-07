@@ -1,9 +1,14 @@
 from PySide.QtGui import QComboBox
 from iris.cube import Cube
+from iris.coords import DimCoord
+
 
 def get_axis_name(axis):
-    # TODO fill this in.
-    return 'axis name'
+    """
+    :type axis:  DimCoord
+    :rtype: str
+    """
+    return axis.name()
 
 
 def get_cube_name(cube):

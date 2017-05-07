@@ -16,6 +16,7 @@ from thea.lib.views.main_window import get_main_window
 from thea.lib.views.selection.user_selection_widget import UserSelectionWidget
 from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
 from thea.lib.views.selection.slice.collapsed_dimension_widget import CollapsedDimensionWidget
+from thea.lib.views.selection.slice.axes_widget import AxesWidget
 
 
 class IntegrationBase(unittest.TestCase):
@@ -51,6 +52,12 @@ class IntegrationBase(unittest.TestCase):
         """
         return self.__get_user_selection_widget()._slice_selection_widget._select_cube_widget
 
+    def __get_axes_widget(self):
+        """
+        :rtype: AxesWidget
+        """
+        return self.__get_user_selection_widget()._slice_selection_widget._axes_widget
+
     def __get_current_figure(self):
         return get_main_window()._central_widget._matplotlib_widget._canvas.figure
 
@@ -64,7 +71,7 @@ class IntegrationBase(unittest.TestCase):
         self.assertEqual(
             expected_name,
             actual_name,
-            'Expected the current cube to be named {0}, but found {1}'.format(expected_name, actual_name)
+            "Expected the current cube to be named '{0}', but found '{1}'".format(expected_name, actual_name)
         )
 
     def _assert_all_cubes_are(self, expected_names):
@@ -73,20 +80,30 @@ class IntegrationBase(unittest.TestCase):
         self.assertEqual(
             expected_names,
             actual_names,
-            'Expected list of cubes to be {0}, but found {1}'.format(expected_names, actual_names)
+            "Expected list of cubes to be '{0}', but found '{1}'".format(expected_names, actual_names)
         )
 
-    def _assert_x_axis_is(self, axis_name):
-        pass
+    def _assert_x_axis_is(self, expected_name):
+        actual_name = self.__get_axes_widget()._x_axis_combo.currentText()
+        self.assertEqual(
+            expected_name,
+            actual_name,
+            "Expected the x-axis to be named '{0}', but found '{1}'".format(expected_name, actual_name)
+        )
 
-    def _assert_y_axis_is(self, axis_name):
-        pass
+    def _assert_y_axis_is(self, expected_name):
+        actual_name = self.__get_axes_widget()._y_axis_combo.currentText()
+        self.assertEqual(
+            expected_name,
+            actual_name,
+            "Expected the y-axis to be named '{0}', but found '{1}'".format(expected_name, actual_name)
+        )
 
     def _assert_no_collapsed_dimensions(self):
         dimensions = self.__get_collapsed_dimensions_widget()._collapsed_dimensions
         self.assertFalse(
             dimensions,
-            'Expected there to be no collapsed dimensions, but found {0}'.format(dimensions)
+            "Expected there to be no collapsed dimensions, but found '{0}'".format(dimensions)
         )
 
     def _assert_cube_readout_contains(self, term):

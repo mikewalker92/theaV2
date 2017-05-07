@@ -27,6 +27,8 @@ class BoundComboBox(QComboBox):
         labels = [self.__to_label_function(item) for item in bound_list_selection.items]
         self.addItems(labels)
 
+        self.setCurrentIndex(bound_list_selection.current_index)
+
 
 class BoundFigureCanvas(FigureCanvas):
 
