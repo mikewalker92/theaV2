@@ -1,5 +1,7 @@
+from datetime import datetime
 from PySide import QtGui
 import sys
+import time
 
 app = QtGui.QApplication(sys.argv)
 
@@ -15,18 +17,28 @@ from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
 
 
 class IntegrationBase(unittest.TestCase):
+    MAX_WEIGHT_SECONDS = 15
+
+    @classmethod
+    def setUpClass(cls):
+        # Start the application
+        get_main_window()
 
     def setUp(self):
-        self.__main_window = get_main_window()
+        self.__initial_figure = self.__get_current_figure()
 
-    def tearDown(self):
-        self.__main_window.close()
+    @classmethod
+    def tearDownClass(cls):
+        get_main_window().close()
 
     def __get_cube_selection_widget(self):
         """
         :rtype: SelectCubeWidget
         """
-        return self.__main_window._central_widget._user_selection_widget._slice_selection_widget._select_cube_widget
+        return get_main_window()._central_widget._user_selection_widget._slice_selection_widget._select_cube_widget
+
+    def __get_current_figure(self):
+        return get_main_window()._central_widget._matplotlib_widget._canvas.figure
 
     # Actions
     def _load_file(self, filename):
@@ -68,5 +80,12 @@ class IntegrationBase(unittest.TestCase):
     def _assert_slice_data_exists(self):
         pass
 
-    def _assert_figure_has_been_plotted(self):
-        pass
+    def _wait_for_figure_to_update(self):
+        start_of_wait = datetime.now()
+
+        while self.__initial_figure == self.__get_current_figure():
+            if (datetime.now() - start_of_wait).seconds > self.MAX_WEIGHT_SECONDS:
+                self.fail('Expected figure to be updated, but it was not')
+            time.sleep(1)
+
+        # continue

@@ -8,6 +8,8 @@ class LoadFileIntegrationTest(IntegrationBase):
         self._load_file('resources/single_2d_cube.pp')
 
         # Then
+        self._wait_for_figure_to_update()
+
         self._assert_cube_name_is('cube name')
         self._assert_all_cubes_are(['cube name'])
         self._assert_x_axis_is('latitude')
@@ -18,4 +20,3 @@ class LoadFileIntegrationTest(IntegrationBase):
         self._assert_slice_readout_contains('cube name')
         self._assert_slice_data_exists()
 
-        self._assert_figure_has_been_plotted()

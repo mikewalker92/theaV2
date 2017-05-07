@@ -31,14 +31,12 @@ class BoundComboBox(QComboBox):
 class BoundFigureCanvas(FigureCanvas):
 
     def __init__(self, bound_figure):
-        self.__figure = bound_figure.value
-
-        super(BoundFigureCanvas, self).__init__(self.__figure)
+        super(BoundFigureCanvas, self).__init__(bound_figure.value)
 
         bound_figure.subscribe(self)
 
     def update_bound_target(self, bound_figure):
-        self.__figure = bound_figure
+        self.figure = bound_figure.value
         self.draw()
 
 

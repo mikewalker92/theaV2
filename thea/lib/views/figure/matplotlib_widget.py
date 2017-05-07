@@ -15,20 +15,16 @@ class MatplotlibWidget(TheaWidget):
         """
         super(MatplotlibWidget, self).__init__()
 
-        self.__figure = None
-        self.__canvas = None
+        self._plot_model = plot_model
 
-        self.__plot_model = plot_model
+        # create a canvas to draw the figure on.
+        self._canvas = BoundFigureCanvas(self._plot_model.figure)
 
         self.__init_ui()
 
     def __init_ui(self):
-
-        # create a canvas to draw the figure on.
-        self.__canvas = BoundFigureCanvas(self.__plot_model.figure)
-
         vbl = QtGui.QVBoxLayout()
-        vbl.addWidget(self.__canvas)
+        vbl.addWidget(self._canvas)
         self.setLayout(vbl)
 
 
