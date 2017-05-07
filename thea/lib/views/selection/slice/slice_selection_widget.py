@@ -9,7 +9,7 @@ from thea.lib.views.selection.slice.axes_widget import AxesWidget
 from thea.lib.views.selection.slice.minor_axes_widget import CollapsedDimensionsWidget
 
 
-class CubeOptionsWidget(TheaWidget):
+class SliceSelectionWidget(TheaWidget):
     """
     A widget for selecting the cube to figure and changing the settings for the figure.
     """
@@ -19,7 +19,7 @@ class CubeOptionsWidget(TheaWidget):
         :type major_axes_widget: AxesWidget
         :type minor_axes_widget: CollapsedDimensionsWidget
         """
-        super(CubeOptionsWidget, self).__init__()
+        super(SliceSelectionWidget, self).__init__()
 
         self._select_cube_widget = select_cube_widget
         self._major_axes_widget = major_axes_widget
@@ -37,12 +37,9 @@ class CubeOptionsWidget(TheaWidget):
         self.setLayout(grid)
 
 
-__cube_options_widget = CubeOptionsWidget(
-    select_cube_widget=get_select_cube_widget(),
-    major_axes_widget=get_major_axes_widget(),
-    minor_axes_widget=get_minor_axes_widget()
-)
-
-
-def get_cube_options_widget():
-    return __cube_options_widget
+def get_slice_selection_widget():
+    return SliceSelectionWidget(
+        select_cube_widget=get_select_cube_widget(),
+        major_axes_widget=get_major_axes_widget(),
+        minor_axes_widget=get_minor_axes_widget()
+    )

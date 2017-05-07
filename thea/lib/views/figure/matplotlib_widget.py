@@ -32,12 +32,10 @@ class MatplotlibWidget(TheaWidget):
         self.setLayout(vbl)
 
 
-_matplotlib_widget = MatplotlibWidget(
-    get_view_model().plot)
-
-
 def get_matplotlib_widget():
     """
     :rtype: MatplotlibWidget
     """
-    return _matplotlib_widget
+    return MatplotlibWidget(
+        plot_model=get_view_model().plot
+    )

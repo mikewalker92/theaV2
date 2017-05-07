@@ -6,13 +6,13 @@ import getopt
 import sys
 
 from PySide import QtGui
+
 app = QtGui.QApplication(sys.argv)
 
 import matplotlib
 matplotlib.use('Qt4Agg')
 matplotlib.rcParams['backend.qt4'] = 'PySide'
 
-from thea.lib.config.properties import properties
 from thea.lib.controllers.new_cube_controller import get_new_cube_controller
 from thea.lib.views.main_window import get_main_window
 
@@ -23,7 +23,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def main(input_args):
     filename = None
-    render_ui = True
 
     try:
         options, _ = getopt.getopt(input_args, "f:", ["file=", "mock-renderer"])
@@ -36,10 +35,6 @@ def main(input_args):
             filename = argument
         elif option == "--file":
             filename = argument
-        elif option == "--mock-renderer":
-            render_ui = False
-
-    properties().render_ui = render_ui
 
     # start the app by creating the main window.
     get_main_window()

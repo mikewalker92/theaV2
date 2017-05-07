@@ -1,7 +1,7 @@
 import os
 from PySide import QtGui
 from thea.lib.controllers.new_cube_controller import get_new_cube_controller, NewCubeController
-from thea.lib.views.central_widget import get_central_widget, CentralWidget
+from thea.lib.views.central_widget import create_central_widget, CentralWidget
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -12,15 +12,15 @@ class MainWindow(QtGui.QMainWindow):
 
     action_open = None
 
-    def __init__(self, central_widget, open_file_controller):
+    def __init__(self, central_widget, new_cube_controller):
         """
         :type central_widget: CentralWidget
-        :type open_file_controller: NewCubeController
+        :type new_cube_controller: NewCubeController
         """
         super(MainWindow, self).__init__()
 
-        self._centralWidget = central_widget
-        self.open_file_controller = open_file_controller
+        self._central_widget = central_widget
+        self._new_cube_controller = new_cube_controller
 
         self.init_ui()
         self.set_up_actions()
@@ -32,7 +32,7 @@ class MainWindow(QtGui.QMainWindow):
         relative_path_to_icon = os.path.join(os.path.dirname(__file__), '../../resources/thea_icon.png')
         self.setWindowIcon(QtGui.QIcon(relative_path_to_icon))
 
-        self.setCentralWidget(self._centralWidget)
+        self.setCentralWidget(self._central_widget)
 
         self.init_menu()
 
@@ -51,11 +51,11 @@ class MainWindow(QtGui.QMainWindow):
 
     def open_file(self):
         filename, _ = QtGui.QFileDialog.getOpenFileName(self, 'Open File')
-        self.open_file_controller.open_file(filename)
+        self._new_cube_controller.open_file(filename)
 
 
 _main_window = MainWindow(
-    get_central_widget(),
+    create_central_widget(),
     get_new_cube_controller())
 
 
