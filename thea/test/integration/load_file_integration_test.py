@@ -18,5 +18,4 @@ class LoadFileIntegrationTest(IntegrationBase):
 
         self._assert_cube_readout_contains('wind_speed_of_gust / (m s-1)')
         self._assert_slice_readout_contains('wind_speed_of_gust / (m s-1)')
-        self._assert_slice_data_exists()
-
+        self._assert_slice_data_is_displayed_in_table(expected_row_count=360, expected_column_count=288)

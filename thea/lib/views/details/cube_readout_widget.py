@@ -18,9 +18,6 @@ class CubeReadoutWidget(TheaWidget):
         font = QFont()
         font.setFamily('Ubuntu Mono')
 
-        font_database = QFontDatabase()
-        print(font_database.families())
-
         self._cube_readout_text_display.setFont(font)
 
         grid = QtGui.QGridLayout()

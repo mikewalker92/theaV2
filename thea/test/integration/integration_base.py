@@ -17,6 +17,7 @@ from thea.lib.views.selection.user_selection_widget import UserSelectionWidget
 from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
 from thea.lib.views.selection.slice.collapsed_dimension_widget import CollapsedDimensionWidget
 from thea.lib.views.selection.slice.axes_widget import AxesWidget
+from thea.bound.target import BoundTableModel
 
 
 class IntegrationBase(unittest.TestCase):
@@ -126,8 +127,29 @@ class IntegrationBase(unittest.TestCase):
             "Expected the slice readout to contain '{0}', but found '{1}'".format(term, slice_readout)
         )
 
-    def _assert_slice_data_exists(self):
-        pass
+    def _assert_slice_data_is_displayed_in_table(self, expected_row_count, expected_column_count):
+        data_table = self.__get_cube_details_widget()._slice_data_widget._cube_data_table
+
+        """
+        :type data_model: BoundTableModel
+        """
+        data_model = data_table.model()
+
+        row_count = data_model.rowCount(None)
+        column_count = data_model.columnCount(None)
+
+        self.assertEqual(
+            expected_row_count,
+            row_count,
+            "Expected the data table to have {0} rows, but found {1}.".format(expected_row_count, row_count)
+        )
+
+        self.assertEqual(
+            expected_column_count,
+            column_count,
+            "Expected the data table to have {0} rows, but found {1}.".format(expected_column_count, column_count)
+        )
+
 
     def _wait_for_figure_to_update(self):
         start_of_wait = datetime.now()

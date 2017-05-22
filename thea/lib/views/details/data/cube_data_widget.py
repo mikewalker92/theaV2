@@ -1,23 +1,30 @@
+from PySide import QtGui
+from thea.bound.target import BoundTableView
+from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
 
 
-class CubeDataWidget(TheaWidget):
+class SliceDataWidget(TheaWidget):
     """
     A table to display data from a 2D slice through a cube.
     """
-    def __init__(self):
-        super(CubeDataWidget, self).__init__()
+    def __init__(self, slice_data):
+        super(SliceDataWidget, self).__init__()
+
+        self._cube_data_table = BoundTableView(slice_data)
 
         self.init_ui()
 
     def init_ui(self):
-        pass
+        layout = QtGui.QHBoxLayout()
+        layout.addWidget(self._cube_data_table)
+        self.setLayout(layout)
 
-_cube_data_widget = CubeDataWidget()
 
-
-def get_cube_data_widget():
+def create_slice_data_widget():
     """
-    :rtype: CubeDataWidget
+    :rtype: SliceDataWidget
     """
-    return _cube_data_widget
+    return SliceDataWidget(
+        slice_data=get_view_model().cube_details.slice_data
+    )
