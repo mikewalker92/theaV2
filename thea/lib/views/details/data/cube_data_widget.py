@@ -1,4 +1,4 @@
-from PySide import QtGui
+from PyQt5.QtWidgets import QHBoxLayout
 from thea.bound.target import BoundTableView
 from thea.lib.models.view_model import get_view_model
 from thea.lib.views.thea_widget import TheaWidget
@@ -16,7 +16,7 @@ class SliceDataWidget(TheaWidget):
         self.init_ui()
 
     def init_ui(self):
-        layout = QtGui.QHBoxLayout()
+        layout = QHBoxLayout()
         layout.addWidget(self._cube_data_table)
         self.setLayout(layout)
 

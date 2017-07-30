@@ -4,12 +4,6 @@ class BoundSource(object):
         self.__subscribers = set()
 
     def subscribe(self, subscriber):
-        """
-        Subscribes a BoundTarget to the BoundSource. The BoundTarget will then be updated whenever the BoundSource
-        changes.
-
-        :param subscriber: A bound target.
-        """
         self.__subscribers.add(subscriber)
 
     def _announce_update(self):

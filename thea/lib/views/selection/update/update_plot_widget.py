@@ -1,20 +1,13 @@
-from PySide import QtGui
+from PyQt5.QtWidgets import QGridLayout, QPushButton
 from thea.lib.controllers.update_plot_controller import get_update_plot_controller
 from thea.lib.views.thea_widget import TheaWidget
 
 
 class UpdatePlotWidget(TheaWidget):
-    """
-    A widget for selecting the cube to figure and changing the settings for the figure.
-    """
-
     def __init__(self, plot_controller):
-        """
-        :type plot_controller: thea.lib.controllers.update_plot_controller.UpdatePlotController
-        """
         super(UpdatePlotWidget, self).__init__()
 
-        self._update_button = QtGui.QPushButton('Update Plot')
+        self._update_button = QPushButton('Update Plot')
 
         self.plot_controller = plot_controller
 
@@ -23,7 +16,7 @@ class UpdatePlotWidget(TheaWidget):
 
     def init_ui(self):
         self.setMaximumHeight(100)
-        grid = QtGui.QGridLayout()
+        grid = QGridLayout()
         grid.addWidget(self._update_button, 0, 0)
         self.setLayout(grid)
 
@@ -36,7 +29,4 @@ _update_plot_widget = UpdatePlotWidget(
 
 
 def get_update_plot_widget():
-    """
-    :rtype: UpdatePlotWidget
-    """
     return _update_plot_widget

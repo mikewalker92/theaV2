@@ -1,24 +1,14 @@
-from PySide import QtGui
-from PySide.QtCore import Qt
-
-from thea.lib.views.details.cube_details_widget import get_cube_details_widget, CubeDetailsWidget
-from thea.lib.views.figure.matplotlib_widget import get_matplotlib_widget, MatplotlibWidget
-from thea.lib.views.selection.user_selection_widget import create_user_selection_widget, UserSelectionWidget
+from PyQt5.QtWidgets import QSplitter, QGridLayout
+from PyQt5.QtCore import Qt
+from thea.lib.views.details.cube_details_widget import get_cube_details_widget
+from thea.lib.views.figure.matplotlib_widget import get_matplotlib_widget
+from thea.lib.views.selection.user_selection_widget import create_user_selection_widget
 from thea.lib.views.thea_widget import TheaWidget
 from thea.resources.thea_colors import Colors
 
 
 class CentralWidget(TheaWidget):
-    """
-    The CentralWidget divides the window into rough sections using splitters, and defines
-    child widgets to populate the sections.
-    """
     def __init__(self, matplotlib_widget, cube_details_widget, user_selection_widget):
-        """
-        :type matplotlib_widget: MatplotlibWidget
-        :type cube_details_widget: CubeDetailsWidget
-        :type user_selection_widget: UserSelectionWidget
-        """
         super(CentralWidget, self).__init__()
 
         self._matplotlib_widget = matplotlib_widget
@@ -30,20 +20,17 @@ class CentralWidget(TheaWidget):
     def init_ui(self):
         self.set_background_color(Colors.background_accent)
 
-        splitter = QtGui.QSplitter(Qt.Vertical)
+        splitter = QSplitter(Qt.Vertical)
         splitter.addWidget(self._matplotlib_widget)
         splitter.addWidget(self._cube_details_widget)
 
-        grid = QtGui.QGridLayout()
+        grid = QGridLayout()
         grid.addWidget(splitter, 1, 0, 2, 1)
         grid.addWidget(self._user_selection_widget, 1, 1, 2, 1)
         self.setLayout(grid)
 
 
 def create_central_widget():
-    """
-    :rtype: CentralWidget
-    """
     return CentralWidget(
         matplotlib_widget=get_matplotlib_widget(),
         cube_details_widget=get_cube_details_widget(),

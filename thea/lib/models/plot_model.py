@@ -2,7 +2,7 @@ from thea.bound.source import BoundValue
 import matplotlib.pyplot as plt
 
 
-class PlotModel():
+class PlotModel(object):
     def __init__(self):
         self.__current_plot = BoundValue(get_current_figure())
 

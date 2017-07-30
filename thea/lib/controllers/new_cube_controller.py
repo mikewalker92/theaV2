@@ -8,18 +8,12 @@ from thea.lib.services.plot_service import plot_new_figure
 
 class NewCubeController(object):
     def __init__(self, view_model):
-        """
-        :type view_model: thea.lib.models.view_model.ViewModel
-        """
         self.__cube_details_model = view_model.cube_details
         self.__plot_model = view_model.plot
         self.__user_selection_model = view_model.user_selection
         self.__plot_selection_model = view_model.user_selection.plot_selection
 
     def open_file(self, filename):
-        """
-        :type filename: str
-        """
         cubes = load_cubes_from_file(filename)
 
         set_cubes_in_file(self.__user_selection_model, cubes)
@@ -44,7 +38,4 @@ __new_cube_controller = NewCubeController(get_view_model())
 
 
 def get_new_cube_controller():
-    """
-    :rtype: NewCubeController
-    """
     return __new_cube_controller

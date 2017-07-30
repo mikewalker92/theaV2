@@ -7,9 +7,6 @@ from thea.lib.services.populate_cube_details_service import populate_cube_detail
 class UpdatePlotController(object):
 
     def __init__(self, view_model):
-        """
-        :type view_model: ViewModel
-        """
         self.__cube_details_model = view_model.cube_details
         self.__plot_model = view_model.plot
         self.__user_selection_model = view_model.user_selection
@@ -30,7 +27,4 @@ _update_plot_controller = UpdatePlotController(get_view_model())
 
 
 def get_update_plot_controller():
-    """
-    :rtype: UpdatePlotController
-    """
     return _update_plot_controller

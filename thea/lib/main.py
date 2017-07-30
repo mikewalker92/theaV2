@@ -5,13 +5,12 @@ import getopt
 
 import sys
 
-from PySide import QtGui
+from PyQt5.QtWidgets import QApplication
 
-app = QtGui.QApplication(sys.argv)
+app = QApplication(sys.argv)
 
 import matplotlib
-matplotlib.use('Qt4Agg')
-matplotlib.rcParams['backend.qt4'] = 'PySide'
+matplotlib.use('Qt5Agg')
 
 from thea.lib.controllers.new_cube_controller import get_new_cube_controller
 from thea.lib.views.main_window import get_main_window
@@ -25,9 +24,9 @@ def main(input_args):
     filename = None
 
     try:
-        options, _ = getopt.getopt(input_args, "f:", ["file=", "mock-renderer"])
+        options, _ = getopt.getopt(input_args, "f:", ["file="])
     except getopt.GetoptError:
-        print "usage: -f <filename> --file<filename> --mock-renderer"
+        print("usage: -f <filename> --file<filename>")
         sys.exit(2)
 
     for option, argument in options:

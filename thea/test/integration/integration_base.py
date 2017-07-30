@@ -1,13 +1,9 @@
 from datetime import datetime
-from PySide import QtGui
+from PyQt5.QtWidgets import QApplication
 import sys
 import time
 
-app = QtGui.QApplication(sys.argv)
-
-import matplotlib
-matplotlib.use('Qt4Agg')
-matplotlib.rcParams['backend.qt4'] = 'PySide'
+app = QApplication(sys.argv)
 
 import unittest
 from thea.lib.controllers.new_cube_controller import get_new_cube_controller
@@ -17,7 +13,6 @@ from thea.lib.views.selection.user_selection_widget import UserSelectionWidget
 from thea.lib.views.selection.slice.select_cube_widget import SelectCubeWidget
 from thea.lib.views.selection.slice.collapsed_dimension_widget import CollapsedDimensionWidget
 from thea.lib.views.selection.slice.axes_widget import AxesWidget
-from thea.bound.target import BoundTableModel
 
 
 class IntegrationBase(unittest.TestCase):
@@ -149,7 +144,6 @@ class IntegrationBase(unittest.TestCase):
             column_count,
             "Expected the data table to have {0} rows, but found {1}.".format(expected_column_count, column_count)
         )
-
 
     def _wait_for_figure_to_update(self):
         start_of_wait = datetime.now()

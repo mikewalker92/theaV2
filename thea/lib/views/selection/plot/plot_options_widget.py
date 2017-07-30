@@ -10,7 +10,4 @@ _plot_options_widget = PlotOptionsWidget()
 
 
 def get_plot_options_widget():
-    """
-    :rtype: PlotOptionsWidget
-    """
     return _plot_options_widget
